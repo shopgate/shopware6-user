@@ -1,0 +1,48 @@
+{
+  "version": "1",
+  "pipeline": {
+    "id": "shopgate.user.updateAddress.v1",
+    "public": true,
+    "input": [
+      {"key": "id", "id": "99"},
+      {"key": "salutation", "id": "100", "optional": true},
+      {"key": "firstName", "id": "101", "optional": true},
+      {"key": "lastName", "id": "102", "optional": true},
+      {"key": "street1", "id": "103", "optional": true},
+      {"key": "street2", "id": "104", "optional": true},
+      {"key": "zipCode", "id": "105", "optional": true},
+      {"key": "city", "id": "106", "optional": true},
+      {"key": "province", "id": "107", "optional": true},
+      {"key": "country", "id": "108", "optional": true},
+      {"key": "tags", "id": "109", "optional": true},
+      {"key": "customAttributes", "id": "110", "optional": true}
+    ],
+    "output": [
+      {"key": "success", "id": "1", "optional": true}
+    ],
+    "steps": [
+      {
+        "type": "extension",
+        "id": "@apite/shopware6-user",
+        "path": "@apite/shopware6-user/user/address/updateAddress.js",
+        "input": [
+          {"key": "id", "id": "99"},
+          {"key": "salutation", "id": "100", "optional": true},
+          {"key": "firstName", "id": "101", "optional": true},
+          {"key": "lastName", "id": "102", "optional": true},
+          {"key": "street1", "id": "103", "optional": true},
+          {"key": "street2", "id": "104", "optional": true},
+          {"key": "zipCode", "id": "105", "optional": true},
+          {"key": "city", "id": "106", "optional": true},
+          {"key": "province", "id": "107", "optional": true},
+          {"key": "country", "id": "108", "optional": true},
+          {"key": "tags", "id": "109", "optional": true},
+          {"key": "customAttributes", "id": "110", "optional": true}
+        ],
+        "output": [
+          {"key": "success", "id": "1",  "optional": true}
+        ]
+      }
+    ]
+  }
+}

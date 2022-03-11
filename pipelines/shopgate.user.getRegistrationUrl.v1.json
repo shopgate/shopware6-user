@@ -1,0 +1,28 @@
+{
+  "version": "1",
+  "pipeline": {
+    "id": "shopgate.user.getRegistrationUrl.v1",
+    "public": true,
+    "input": [
+      {"key": "sgxsMeta", "id": "1000", "optional": true}
+    ],
+    "output": [
+      {"key": "url", "id": "1010"},
+      {"key": "expires", "id": "1020"}
+    ],
+    "steps": [
+      {
+        "type": "extension",
+        "id": "@apite/shopware6-user",
+        "path": "@apite/shopware6-user/lib/getRegistrationUrl.js",
+        "input": [
+          {"key": "sgxsMeta", "id": "1000", "optional": true}
+        ],
+        "output": [
+          {"key": "url", "id": "1010"},
+          {"key": "expires", "id": "1020"}
+        ]
+      }
+    ]
+  }
+}

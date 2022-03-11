@@ -1,0 +1,28 @@
+{
+  "version": "1",
+  "pipeline": {
+    "id": "shopgate.user.updateUser.v1",
+    "public": true,
+    "input": [
+      {"key": "firstName", "id": "1010", "optional": true},
+      {"key": "lastName", "id": "1020", "optional": true},
+      {"key": "customAttributes", "id": "1030", "optional": true}
+    ],
+    "output": [
+    ],
+    "steps": [
+      {
+        "type": "extension",
+        "id": "@apite/shopware6-user",
+        "path": "@apite/shopware6-user/user/updateUser.js",
+        "input": [
+          {"key": "firstName", "id": "1010", "optional": true},
+          {"key": "lastName", "id": "1020", "optional": true},
+          {"key": "customAttributes", "id": "1030", "optional": true}
+        ],
+        "output": [
+        ]
+      }
+    ]
+  }
+}

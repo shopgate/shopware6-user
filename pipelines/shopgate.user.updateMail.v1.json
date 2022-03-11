@@ -1,0 +1,22 @@
+{
+  "version": "1",
+  "pipeline": {
+    "id": "shopgate.user.updateMail.v1",
+    "public": true,
+    "input": [
+      {"key": "mail", "id": "1010"}
+    ],
+    "output": [],
+    "steps": [
+      {
+        "type": "extension",
+        "id": "@apite/shopware6-user",
+        "path": "@apite/shopware6-user/user/updateMail.js",
+        "input": [
+          {"key": "mail", "id": "1010"}
+        ],
+        "output": []
+      }
+    ]
+  }
+}

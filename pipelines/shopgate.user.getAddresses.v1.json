@@ -1,0 +1,22 @@
+{
+  "version": "1",
+  "pipeline": {
+    "id": "shopgate.user.getAddresses.v1",
+    "public": true,
+    "input": [],
+    "output": [
+      {"key": "addresses", "id": "10"}
+    ],
+    "steps": [
+      {
+        "type": "extension",
+        "id": "@apite/shopware6-user",
+        "path": "@apite/shopware6-user/user/address/getAddresses.js",
+        "input": [],
+        "output": [
+          {"key": "addresses", "id": "10"}
+        ]
+      }
+    ]
+  }
+}

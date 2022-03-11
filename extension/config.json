@@ -1,0 +1,12 @@
+{
+  "shopware": {
+    "endpoint": "http://138.201.246.198:8182",
+    "accessToken": "SWSCWGXBVLPABMXDMEDERLEWZQ",
+    "languageId": "2fbb5fe2e29a4d70aa5854ce7ce3e20b"
+  },
+  "settings": {
+    "enableCoupons": true,
+    "legalText": "By placing your order you agree to our <b><u>Privacy Policy</u></b>, our <b><u>Terms and Conditions</u></b> and our <b><u>Cancellation policy</u></b>.",
+    "legalInfo": "Additional charges (duties, taxes) may be raised, when shipping to countries outside of the EU."
+  }
+}
