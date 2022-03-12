@@ -1,0 +1,43 @@
+{
+  "info": {
+    "_postman_id": "f71d0fc0-32a2-4fe8-9f7c-4e47a867370d",
+    "name": "SW6 - User",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "getUser",
+      "item": [
+        {
+          "name": "customer",
+          "item": [
+            {
+              "name": "customerLogin",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"strategy\": \"basic\",\n    \"parameters\": {\n        \"login\": \"{{username}}\",\n        \"password\": \"{{password}}\"\n    }\n}"
+                },
+                "url": {
+                  "raw": "{{domain}}{{endpoint_user_login}}",
+                  "host": [
+                    "{{domain}}{{endpoint_user_login}}"
+                  ]
+                },
+                "description": "customerLogin"
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

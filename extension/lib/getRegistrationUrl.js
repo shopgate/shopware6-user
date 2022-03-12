@@ -1,5 +1,5 @@
 /**
- * @param {PipelineContext} context
+ * @param {SW6User.PipelineContext} context
  * @param {GetRegistrationUrlInput} input
  * @param {function} callback
  */

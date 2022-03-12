@@ -1,56 +1,43 @@
-const { login, setup, getSessionContext} = require('@shopware-pwa/shopware-6-client')
-const InvalidCredentialsError = require('./shopgate/customer/errors/InvalidCredentialsError');
-const { decorateError } = require('./shopgate/logDecorator');
+'use strict'
+
+const InvalidCredentialsError = require('./shopgate/customer/errors/InvalidCredentialsError')
+const { login, getSessionContext } = require('@shopware-pwa/shopware-6-client')
+const { decorateError } = require('./shopgate/logDecorator')
 
 /**
- *
- * @param {PipelineContext} context
- * @param {object} input
- * @returns {Promise.<LoginResponse>}
+ * @param {SW6User.PipelineContext} context
+ * @param {UserLoginInput} input
+ * @returns {Promise<{userId: string, contextToken: string}>}
  */
 module.exports = async function (context, input) {
-
   console.log('login')
   console.log('login')
   console.log('login')
 
-  const contextToken = await apiLogin(input, context);
-
-  // await context.storage.user.set('contextToken', contextToken)
-
-  const { endpoint, accessToken, languageId } = context.config.shopware
-  setup({
-    endpoint,
-    accessToken,
-    languageId,
-    contextToken
-  })
-
-
-  const sessionContext = await getSessionContext();
+  const contextToken = await apiLogin(input, context)
+  // todo: handle errors
+  const userId = await getSessionContext().then(swContext => swContext.customer.id)
 
   return {
-    userId: sessionContext.customer.id,
+    userId,
     contextToken
   }
 }
 
 /**
- * @param {object} input
- * @param {object} context
- * @returns {Promise}
+ * @param {UserLoginInput} input
+ * @param {SW6User.PipelineContext} context
+ * @returns Promise<string>
  */
 const apiLogin = async function (input, context) {
   try {
-    // TODO: document problem, user might be bound to a sales channel
-    const loginResponse = await login({ username: input.parameters.login, password: input.parameters.password});
-    // const loginResponse = await login({ username: input.parameters.login, password: 'Shopwareq12wer'});
+    const loginResponse = await login({ username: input.parameters.login, password: input.parameters.password })
     return loginResponse.contextToken
   } catch (err) {
     context.log.error(decorateError(err), 'Error in login process.')
     if (err.statusCode === 401) {
-      throw new InvalidCredentialsError(err.messages[0].detail, err.messages[0].title);
+      throw new InvalidCredentialsError(err.messages[0].detail, err.messages[0].title)
     }
-    throw new InvalidCredentialsError(err);
+    throw new InvalidCredentialsError(err)
   }
 }

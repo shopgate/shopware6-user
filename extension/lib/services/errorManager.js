@@ -67,7 +67,7 @@ const wrapErrorForPrint = function (error) {
 
 /**
  * @param {SWCartErrors} errorList
- * @param {PipelineContext} context
+ * @param {SW6User.PipelineContext} context
  */
 const throwOnCartErrors = function (errorList, context) {
   Object.keys(errorList).forEach((key) => {

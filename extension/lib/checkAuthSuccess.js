@@ -2,7 +2,7 @@ const AuthFailedError = require('./shopgate/customer/errors/AuthFailedError')
 
 /**
  *
- * @param {PipelineContext} context
+ * @param {SW6User.PipelineContext} context
  * @param {Object} input
  * @param {boolean} input.authSuccess
  * @param {string} input.authType
