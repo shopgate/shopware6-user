@@ -53,6 +53,14 @@
           {"key": "authType", "id": "1060"}
         ],
         "output": []
+      },
+      {
+        "type": "pipeline",
+        "id": "apite.cart.setContextToken.v1",
+        "input": [
+          {"key": "contextToken", "id": "1040"}
+        ],
+        "output": []
       }
     ]
   }

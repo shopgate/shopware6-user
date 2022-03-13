@@ -3,8 +3,8 @@
 const extension = '@apite-shopware6-user'
 
 /**
- * @param {SWClientApiError|SWEntityError|SWShopwareError|Error} error
- * @return {SWEntityError[]|SWShopwareError[]|string[]}
+ * @param {SW6User.ClientApiError|SW6User.EntityError|SW6User.ShopwareError|Error} error
+ * @return {SW6User.EntityError[]|SW6User.ShopwareError[]|string[]}
  */
 const extractErrorMessages = function (error) {
   if (error.statusCode) {
@@ -19,7 +19,7 @@ const extractErrorMessages = function (error) {
 }
 
 /**
- * @param {SWClientApiError|SWEntityError|SWShopwareError|Error} error
+ * @param {SW6User.ClientApiError|SW6User.EntityError|SW6User.ShopwareError|Error} error
  * @return {string|number}
  */
 const extractErrorCode = function (error) {
@@ -34,8 +34,8 @@ const extractErrorCode = function (error) {
 }
 
 /**
- * @param {Error} error
- * @return {{extension: string, code: (string|number), messages: (SWEntityError[]|SWShopwareError[]|string[])}}
+ * @param {SW6User.ClientApiError|SW6User.EntityError|SW6User.ShopwareError|Error} error
+ * @return {{extension: string, code: (string|number), messages: (SW6User.EntityError[]|SW6User.ShopwareError[]|string[])}}
  */
 const decorateError = function (error) {
   return {

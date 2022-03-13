@@ -1,3 +1,11 @@
+/* eslint-disable */
+// noinspection ES6ShorthandObjectProperty
+const {
+  ClientApiError,
+  EntityError,
+  ShopwareError
+} = require('@shopware-pwa/commons')
+
 /**
  * @typedef {Object} UserLoginInput
  * @property {string} strategy
@@ -28,3 +36,7 @@
  * @property {string} id
  * @property {string} name
  */
+
+/** @typedef {EntityError} SW6User.EntityError */
+/** @typedef {ShopwareError} SW6User.ShopwareError */
+/** @typedef {ClientApiError} SW6User.ClientApiError */
