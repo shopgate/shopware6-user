@@ -20,7 +20,8 @@
       "path": "extension/lib/hooks/AuthSetup.js",
       "description": "Sets up authentication before every pipeline call",
       "hooks": [
-        "shopgate.user.loginUser.v1:before"
+        "shopgate.user.loginUser.v1:before",
+        "shopgate.user.logoutUser.v1:before"
       ],
       "input": [],
       "output": []
