@@ -1,46 +1,42 @@
+'use strict'
+
 const { getSessionContext } = require('@shopware-pwa/shopware-6-client')
 const UnauthorisedError = require('./shopgate/customer/errors/UnauthorisedError')
+
 /**
- * @param {SW6User.PipelineContext} context
- * @returns {Promise<getUserResponse>}
+ * @returns {Promise<SW6User.getUserResponse>}
  */
-module.exports = async function (context) {
+module.exports = async () => {
   console.log('getUser called')
   console.log('getUser called')
   console.log('getUser called')
-  if (!context.meta.userId) {
+
+  // todo: handle errors
+  const sessionContext = await getSessionContext()
+  if (!sessionContext.customer) {
+    // todo: is this a possible scenario? If so, we need to do this for every pipeline
     throw new UnauthorisedError('Permission denied: User is not logged in.')
   }
-
-  try {
-    const sessionContext = await getSessionContext()
-    if (!sessionContext.customer) {
-      throw new UnauthorisedError('Permission denied: User is not logged in.')
-    }
-
-    return {
-      id: sessionContext.customer.id,
-      mail: sessionContext.customer.email,
-      firstName: sessionContext.customer.firstName,
-      lastName: sessionContext.customer.lastName,
-      gender: null,
-      birthday: sessionContext.customer.birthday ? processDate(sessionContext.customer.birthday) : null,
-      phone: null,
-      customerGroups: sessionContext.customer.groupId,
-      addresses: []
-    }
-  } catch (error) {
-    context.log.error(error)
-    throw error
+  return {
+    id: sessionContext.customer.id,
+    mail: sessionContext.customer.email,
+    firstName: sessionContext.customer.firstName,
+    lastName: sessionContext.customer.lastName,
+    birthday: sessionContext.customer.birthday ? processDate(sessionContext.customer.birthday) : null,
+    userGroups: [
+      {
+        id: sessionContext.currentCustomerGroup.id,
+        name: sessionContext.currentCustomerGroup.translated.name
+      }
+    ]
   }
 }
 
 function processDate (dateString) {
-  let date = new Date(dateString)
-
-  let year = date.getFullYear()
-  let month = String(date.getMonth()).padStart(2, '0')
-  let day = String(date.getDate()).padStart(2, '0')
+  const date = new Date(dateString)
+  const year = date.getFullYear()
+  const month = String(date.getMonth()).padStart(2, '0')
+  const day = String(date.getDate()).padStart(2, '0')
 
   return year + '-' + month + '-' + day
 }

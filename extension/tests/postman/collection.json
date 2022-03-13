@@ -136,6 +136,81 @@
                 "description": "customerLogin"
               },
               "response": []
+            },
+            {
+              "name": "getUser",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "const response = pm.response.json();",
+                      "const user = response;",
+                      "",
+                      "pm.test(\"Status code is 200\", function() {",
+                      "    pm.response.to.have.status(200);",
+                      "})",
+                      "pm.test(\"Test if response is okay, with body and json\", function() {",
+                      "    pm.response.to.be.ok,",
+                      "        pm.response.to.be.with.body,",
+                      "        pm.response.to.be.json;",
+                      "});",
+                      "",
+                      "pm.test(\"Make sure all required user data was properly set\", function() {",
+                      "    pm.expect(user.id).to.be.a('string', 'ID - not a string provided!').to.not.be.empty;",
+                      "    pm.expect(user.mail).to.be.a('string', 'Mail - not a string provided!').to.not.be.empty;",
+                      "});",
+                      "",
+                      "pm.test(\"Make sure all optional string based user data was properly set in the right format\", function() {",
+                      "    const generalKeys = [",
+                      "        'firstName',",
+                      "        'lastName'",
+                      "    ];",
+                      "    generalKeys.map(function(item) {",
+                      "        pm.expect(user[item]).to.be.a('string', item + ' - Not a string provided!');",
+                      "    });",
+                      "});",
+                      "",
+                      "pm.test(\"Make sure the userGroups are set as array\", function() {",
+                      "    pm.expect(user.userGroups).to.be.a('array');",
+                      "});",
+                      "",
+                      "// pm.test(\"Make sure the customAttributes are set as object\", function() {",
+                      "//     pm.expect(user.customAttributes).to.be.a('object');",
+                      "// });",
+                      "",
+                      "pm.test(\"Make sure that user Groups is set has an property id and name with the right string based value\", function() {",
+                      "    const testUserGroup = user.userGroups.pop();",
+                      "    pm.expect(testUserGroup).to.have.property('id');",
+                      "    pm.expect(testUserGroup).to.have.property('name');",
+                      "    pm.expect(testUserGroup.id).to.be.a('string', 'ID - not a string provided!');",
+                      "    pm.expect(testUserGroup.name).to.be.a('string', 'Name - not a string provided!');",
+                      "})"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}"
+                },
+                "url": {
+                  "raw": "{{domain}}{{endpoint_user_get}}",
+                  "host": [
+                    "{{domain}}{{endpoint_user_get}}"
+                  ]
+                }
+              },
+              "response": []
             }
           ]
         }

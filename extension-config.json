@@ -21,7 +21,17 @@
       "description": "Sets up authentication before every pipeline call",
       "hooks": [
         "shopgate.user.loginUser.v1:before",
-        "shopgate.user.logoutUser.v1:before"
+        "shopgate.user.logoutUser.v1:before",
+        "shopgate.user.getUser.v1:before"
+      ],
+      "input": [],
+      "output": []
+    },
+    {
+      "path": "extension/lib/hooks/isAuthorized.js",
+      "description": "There pipelines require the user to be logged in. We throw if not.",
+      "hooks": [
+        "shopgate.user.getUser.v1:before"
       ],
       "input": [],
       "output": []
