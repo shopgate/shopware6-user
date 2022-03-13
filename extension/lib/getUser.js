@@ -23,7 +23,7 @@ module.exports = async (context) => {
     mail: sessionContext.customer.email,
     firstName: sessionContext.customer.firstName,
     lastName: sessionContext.customer.lastName,
-    birthday: sessionContext.customer.birthday ? processDate(sessionContext.customer.birthday) : undefined,
+    birthday: processDate(sessionContext.customer.birthday),
     userGroups: [
       {
         id: sessionContext.currentCustomerGroup.id,
@@ -34,14 +34,16 @@ module.exports = async (context) => {
 }
 
 /**
- * @param {string} dateString
- * @return {string} - YYYY-MM-DD
+ * @param {string|undefined} dateString
+ * @return {string|undefined} - YYYY-MM-DD
  */
 function processDate (dateString) {
+  if (!dateString) {
+    return undefined
+  }
   const date = new Date(dateString)
-  const year = date.getFullYear()
   const month = String(date.getMonth()).padStart(2, '0')
   const day = String(date.getDate()).padStart(2, '0')
 
-  return year + '-' + month + '-' + day
+  return date.getFullYear() + '-' + month + '-' + day
 }
