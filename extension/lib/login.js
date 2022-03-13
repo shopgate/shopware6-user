@@ -2,7 +2,7 @@
 
 const InvalidCredentialsError = require('./shopgate/customer/errors/InvalidCredentialsError')
 const { login, getSessionContext } = require('@shopware-pwa/shopware-6-client')
-const { decorateError } = require('./shopgate/logDecorator')
+const { decorateError } = require('./services/logDecorator')
 const { getContextToken } = require('./services/contextManager')
 
 /**

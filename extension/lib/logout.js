@@ -1,4 +1,4 @@
-const { decorateError } = require('./shopgate/logDecorator')
+const { decorateError } = require('./services/logDecorator')
 const { logout, getSessionContext } = require('@shopware-pwa/shopware-6-client')
 const { getContextToken } = require('./services/contextManager')
 
