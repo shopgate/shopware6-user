@@ -1,6 +1,8 @@
-const { decorateError } = require('./services/logDecorator')
+'use strict'
+
 const { logout, getSessionContext } = require('@shopware-pwa/shopware-6-client')
 const { getContextToken } = require('./services/contextManager')
+const { throwOnApiError } = require('./services/errorManager')
 
 /**
  * @param {SW6User.PipelineContext} context
@@ -18,15 +20,12 @@ module.exports = async function (context) {
       contextToken: await getContextToken(context)
     }
   }
-  await logout().catch(err => context.log.error(decorateError(err), 'failed to logout'))
+  await logout().catch(error => throwOnApiError(error, context))
 
   // todo: should we ask for a new contextToken or load the one before login? Decision may affect the cart.
-  // todo: handle errors
   const contextToken = await getSessionContext()
     .then(response => response.token)
-    .catch(err => {
-      context.log.error(decorateError(err), 'failed to getSessionContext')
-      throw err
-    })
+    .catch(error => throwOnApiError(error, context))
+
   return { contextToken }
 }

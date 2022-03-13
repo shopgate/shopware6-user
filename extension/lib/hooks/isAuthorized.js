@@ -1,6 +1,6 @@
 'use strict'
 
-const UnauthorisedError = require('../shopgate/customer/errors/UnauthorisedError')
+const { UnauthorisedError } = require('../services/errorList')
 
 /**
  * @param {SW6User.PipelineContext} context

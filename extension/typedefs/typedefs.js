@@ -20,7 +20,7 @@
  * @property {string|undefined} phone
  * @property {string|undefined} birthday YYYY-MM-DD
  * @property {SW6User.UserGroup[]} userGroups
- * @property {Object} customAttributes key value attributes
+ * @property {Object|undefined} customAttributes key value attributes
  */
 
 /**

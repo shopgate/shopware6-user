@@ -1,9 +1,8 @@
 'use strict'
 
-const InvalidCredentialsError = require('./shopgate/customer/errors/InvalidCredentialsError')
 const { login, getSessionContext } = require('@shopware-pwa/shopware-6-client')
-const { decorateError } = require('./services/logDecorator')
 const { getContextToken } = require('./services/contextManager')
+const { throwOnApiError } = require('./services/errorManager')
 
 /**
  * @param {SW6User.PipelineContext} context
@@ -23,8 +22,9 @@ module.exports = async function (context, input) {
     }
   }
   const contextToken = await apiLogin(input, context)
-  // todo: handle errors
-  const userId = await getSessionContext().then(swContext => swContext.customer.id)
+  const userId = await getSessionContext()
+    .then(swContext => swContext.customer.id)
+    .catch(e => throwOnApiError(e, context))
 
   return {
     userId,
@@ -40,11 +40,5 @@ module.exports = async function (context, input) {
 const apiLogin = async function (input, context) {
   return login({ username: input.parameters.login, password: input.parameters.password })
     .then(response => response.contextToken)
-    .catch(err => {
-      context.log.error(decorateError(err), 'Error in login process.')
-      if (err.statusCode === 401) {
-        throw new InvalidCredentialsError(err.messages[0].detail, err.messages[0].title)
-      }
-      throw new InvalidCredentialsError(err)
-    })
+    .catch(err => throwOnApiError(err, context))
 }

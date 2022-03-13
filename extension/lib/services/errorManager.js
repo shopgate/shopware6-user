@@ -1,94 +1,37 @@
 'use strict'
 
-class UnknownError extends Error {
-  constructor () {
-    super('An internal error occurred.')
-
-    this.code = 'EUNKNOWN'
-    this.displayMessage = null
-  }
-}
-
-class ProductNotFoundError extends Error {
-  constructor () {
-    // todo: translate
-    super('Unfortunately, this product is no longer available')
-    this.code = 'ENOTFOUND'
-  }
-}
-
-class ProductStockReachedError extends Error {
-  constructor () {
-    // todo: translate
-    super('Maximum stock reached for this product')
-    this.code = 'ESTOCKREACHED'
-  }
-}
-
-/**
- * @param {SWErrorLevel} shopwareType
- */
-const toShopgateType = function (shopwareType) {
-  switch (shopwareType) {
-    case 20:
-      return 'error'
-    case 10:
-      return 'warning'
-    case 0:
-    default:
-      return 'info'
-  }
-}
-
-/**
- * @param {SWEntityError} error
- * @return SGCartMessage
- */
-const toShopgateMessage = function (error) {
-  return {
-    type: toShopgateType(error.level),
-    code: error.messageKey,
-    message: error.message,
-    messageParams: {},
-    translated: true
-  }
-}
+const { decorateError } = require('./logDecorator')
+const { UnknownError, InvalidCredentialsError } = require('./errorList')
 
 /**
  * @param {SWClientApiError|Error} error
- * @return string
- */
-const wrapErrorForPrint = function (error) {
-  if (error?.statusCode) {
-    return JSON.stringify(error.messages)
-  }
-  return error.message
-}
-
-/**
- * @param {SWCartErrors} errorList
  * @param {SW6User.PipelineContext} context
+ * @see https://shopware.stoplight.io/docs/store-api/ZG9jOjExMTYzMDU0-error-handling
+ * @throws {Error}
  */
-const throwOnCartErrors = function (errorList, context) {
-  Object.keys(errorList).forEach((key) => {
-    switch (errorList[key].messageKey) {
-      case 'product-not-found':
-        throw new ProductNotFoundError()
-      case 'product-stock-reached':
-        throw new ProductStockReachedError()
-      default:
-        context.log.debug('Cannot map error: ' + wrapErrorForPrint(errorList[key]))
-        throw new UnknownError()
-    }
-  })
+const throwOnApiError = function (error, context) {
+  if (!error.statusCode) {
+    context.log.error(decorateError(error))
+    throw new UnknownError()
+  }
+  switch (error.statusCode) {
+    case 401:
+      context.log.error(decorateError(error), 'Unauthorized request, is user/password correct?')
+      throw new InvalidCredentialsError(error.messages[0]?.detail)
+    case 403:
+      context.log.fatal(decorateError(error), 'Cannot call this endpoint with authentication')
+      throw new UnknownError()
+    case 412:
+      context.log.fatal(decorateError(error), 'Possibly SalesChannel access key is invalid.')
+      throw new UnknownError()
+    case 500:
+    default:
+      context.log.fatal(decorateError(error), 'Unmapped error')
+      throw new UnknownError()
+  }
 }
 
 module.exports = {
   UnknownError,
-  ProductNotFoundError,
-  ProductStockReachedError,
-  throwOnCartErrors,
-  toShopgateType,
-  toShopgateMessage,
-  wrapErrorForPrint
+  throwOnApiError
 }

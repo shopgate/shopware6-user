@@ -1,21 +1,22 @@
-const { getSessionContext, getCustomerAddresses } = require('@shopware-pwa/shopware-6-client');
-const UnauthorisedError = require('../../lib/shopgate/customer/errors/UnauthorisedError');
+'use strict'
+
+const { getSessionContext, getCustomerAddresses } = require('@shopware-pwa/shopware-6-client')
+const { UnauthorisedError } = require('../../lib/services/errorList')
 
 /**
  * @param {Object} context
  * @returns {Promise<{addresses: *}>}
  */
 module.exports = async function (context) {
+  const sessionContext = await getSessionContext()
+  if (!sessionContext.customer) {
+    context.log.error('Permission denied: User is not logged in.')
+    throw new UnauthorisedError('Permission denied: User is not logged in.')
+  }
+
   try {
-
-    const sessionContext = await getSessionContext();
-    if (!sessionContext.customer) {
-      throw new UnauthorisedError('Permission denied: User is not logged in.')
-    }
-
     // TODO-Rainer test this with a real call from the app
-
-    const addresses = await getCustomerAddresses();
+    const addresses = await getCustomerAddresses()
 
     return {
       addresses: addresses.elements.map(address => ({
@@ -24,7 +25,7 @@ module.exports = async function (context) {
         firstName: address.firstName,
         lastName: address.lastName,
         street1: address.street,
-        street2: address.additionalAddressLine1 ? address.additionalAddressLine1 + " | " + address.additionalAddressLine2: address.additionalAddressLine2,
+        street2: address.additionalAddressLine1 ? address.additionalAddressLine1 + ' | ' + address.additionalAddressLine2 : address.additionalAddressLine2,
         zipCode: address.zipcode,
         city: address.city,
         province: getProvince(address),
@@ -33,7 +34,6 @@ module.exports = async function (context) {
         customAttributes: getCustomAttributes(address)
       }))
     }
-
   } catch (error) {
     context.log.error(error)
     throw error
@@ -63,7 +63,7 @@ module.exports = async function (context) {
    * @returns {string}
    * @private
    */
-  function getProvince(address) {
+  function getProvince (address) {
     let province = ''
     if (address.countryState && address.countryState.shortCode) {
       province = address.countryState.shortCode

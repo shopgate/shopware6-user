@@ -1,13 +1,9 @@
+'use strict'
 
 /**
- *
- * @param context
- * @param input
  * @returns {Promise<{success: boolean}>}
  */
-module.exports = async function (context, input) {
-
+module.exports = async function () {
   // TODO-Rainer send address to SW6
-
-  return { success: true };
+  return { success: true }
 }
