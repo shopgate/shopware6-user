@@ -14,7 +14,7 @@ module.exports = async (context) => {
     throw new UnknownError()
   }
   const contextToken = await getContextToken(context).then(contextToken => {
-    if (contextToken) {
+    if (typeof contextToken === 'string' && contextToken.length > 0) {
       return contextToken
     }
     onConfigChange(({ config }) => {
