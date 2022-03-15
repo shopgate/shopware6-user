@@ -41,20 +41,9 @@ declare namespace SW6User {
   }
 
   interface PipelineConfiguration {
-    shopware: PipelineConfigShopware,
-    settings: PipelineConfigSettings
-  }
-
-  interface PipelineConfigShopware {
     endpoint: string
     accessToken: string
-    languageId: string
-  }
-
-  interface PipelineConfigSettings {
-    enableCoupons: boolean
-    legalText: string
-    legalInfo: string
+    languageId: string,
   }
 
   interface PipelineContextMeta {
