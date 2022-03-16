@@ -1,0 +1,30 @@
+{
+  "name": "@shopgate/magento-user",
+  "version": "0.0.1",
+  "description": "prototype",
+  "scripts": {
+    "lint": "./node_modules/.bin/eslint --ignore-path ../.gitignore --ext .js --ext .jsx ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shopgate/ext-magento-user.git"
+  },
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@shopgate/engage": "6.18.7",
+    "@shopgate/eslint-config": "6.18.7",
+    "@shopgate/pwa-common": "6.18.7",
+    "@shopgate/pwa-common-commerce": "6.18.7",
+    "@shopgate/pwa-core": "6.18.7",
+    "@shopgate/pwa-ui-shared": "6.18.7",
+    "@shopgate/tracking-core": "6.18.7",
+    "@shopgate/pwa-webcheckout-shopify": "6.18.7",
+    "prop-types": "~15.7.2",
+    "react": "~16.12.0",
+    "react-redux": "^5.1.2",
+    "redux": "^4.0.1"
+  },
+  "peerDependencies": {
+    "@shopgate/pwa-common": "6.x"
+  }
+}
