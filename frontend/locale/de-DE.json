@@ -13,7 +13,8 @@
     },
     "account": {
       "loginBadCredentials": "Es konnte kein Account mit den angegebenen Zugangsdaten gefunden werden.",
-      "loginThrottled": "Zu viele Anmeldeversuche. Bitte warten Sie %seconds% Sekunden, bevor Sie erneut versuchen, sich anzumelden."
+      "loginThrottled": "Zu viele Anmeldeversuche. Bitte warten Sie %seconds% Sekunden, bevor Sie erneut versuchen, sich anzumelden.",
+      "inactiveAccountAlert": "Ihr Kundenkonto wurde noch nicht aktiviert. Wir haben Ihnen einen Aktivierungslink geschickt. Bitte prüfen Sie Ihr E-Mail-Postfach, um die Anmeldung abzuschließen!"
     }
   }
 }
