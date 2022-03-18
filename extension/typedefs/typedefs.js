@@ -7,15 +7,20 @@ const {
 } = require('@shopware-pwa/commons')
 
 /**
- * @typedef {Object} UserLoginInput
- * @property {string} strategy
- * @property {UserLoginStrategyBasic} parameters
+ * @typedef {Object} SW6User.UserLoginInput
+ * @property {'auth_code'|'basic'} strategy
+ * @property {SW6User.UserLoginStrategyBasic|SW6User.UserLoginStrategyToken} parameters
  */
 
 /**
- * @typedef {Object} UserLoginStrategyBasic
+ * @typedef {Object} SW6User.UserLoginStrategyBasic
  * @property {string} login - email
  * @property {string} password
+ */
+
+/**
+ * @typedef {Object} SW6User.UserLoginStrategyToken
+ * @property {string} token - shopware context token
  */
 
 /**
