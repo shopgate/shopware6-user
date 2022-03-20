@@ -11,6 +11,7 @@ const { decorateMessage } = require('../services/logDecorator')
  */
 module.exports = async (context) => {
   const swContext = await getSessionContext().catch(error => throwOnApiError(error, context))
+  // todo: check if guest property also needed to be checked (see SW login endpoint logic)
   if (!swContext.customer) {
     context.log.error(decorateMessage('Logged in the app, but contextToken is of a guest'))
     // todo: translate
