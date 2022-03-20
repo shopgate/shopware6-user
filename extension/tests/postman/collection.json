@@ -257,6 +257,48 @@
           ]
         }
       ]
+    },
+    {
+      "name": "getRegistrationUrl",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const response = pm.response.json();",
+              "",
+              "pm.test(\"Status code is 200\", function() {",
+              "    pm.response.to.have.status(200);",
+              "})",
+              "",
+              "pm.test(\"has url\", function() {",
+              "    pm.expect(response.url).to.be.a('string').to.not.be.empty;",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{}"
+        },
+        "url": {
+          "raw": "{{domain}}{{endpoint_user_registrationUrl_get}}",
+          "host": [
+            "{{domain}}{{endpoint_user_registrationUrl_get}}"
+          ]
+        }
+      },
+      "response": []
     }
   ]
 }
