@@ -1,7 +1,7 @@
 'use strict'
 
-const {login, getSessionContext, update} = require('@shopware-pwa/shopware-6-client');
-const {getContextToken} = require('./services/contextManager');
+const { login, getSessionContext, update } = require('@shopware-pwa/shopware-6-client')
+const { getContextToken } = require('./services/contextManager')
 const { throwOnApiError } = require('./services/errorManager')
 
 /**
@@ -11,29 +11,29 @@ const { throwOnApiError } = require('./services/errorManager')
  */
 module.exports = async function (context, input) {
   if (context.meta.userId) {
-    context.log.warn('User is already logged in');
+    context.log.warn('User is already logged in')
     return {
       userId: context.meta.userId,
       contextToken: await getContextToken(context)
-    };
+    }
   }
 
-  let contextToken;
-  if (input.strategy === 'auth_code' && input.parameters.token) {
-    update({contextToken: input.parameters.token});
-    contextToken = input.parameters.token;
+  let contextToken
+  if (input.strategy === 'auth_code' && input.parameters.code) {
+    update({ contextToken: input.parameters.code })
+    contextToken = input.parameters.code
   } else {
-    contextToken = await apiLogin(input, context);
+    contextToken = await apiLogin(input, context)
   }
 
   const userId = await getSessionContext()
-      .then(swContext => swContext.customer.id)
-      .catch(e => throwOnApiError(e, context));
+    .then(swContext => swContext.customer.id)
+    .catch(e => throwOnApiError(e, context))
 
   return {
     userId,
     contextToken
-  };
+  }
 }
 
 /**

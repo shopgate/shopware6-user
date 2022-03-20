@@ -20,7 +20,7 @@ const throwOnApiError = function (error, context) {
       throw new UnknownError()
     case 500:
     default:
-      throwOnMessage(error.messages, context);
+      throwOnMessage(error.messages, context)
   }
 }
 
@@ -34,20 +34,20 @@ const throwOnMessage = function (messages, context) {
     switch (message.code) {
       case 'CHECKOUT__CUSTOMER_NOT_LOGGED_IN':
         // do not need to throw as this is a soft error, maybe?
-        context.log.debug(decorateError(message), 'Logged in SG, but contextToken is of a guest. Cannot logout.');
-        break;
+        context.log.debug(decorateError(message), 'Logged in SG, but contextToken is of a guest. Cannot logout.')
+        break
       case 'CHECKOUT__CUSTOMER_AUTH_THROTTLED':
-        context.log.debug(decorateError(message), 'Too many login attempts. Need to wait.');
-        throw new UnknownError();
+        context.log.debug(decorateError(message), 'Too many login attempts. Need to wait.')
+        throw new UnknownError()
       case 'CHECKOUT__CUSTOMER_AUTH_BAD_CREDENTIALS':
-        context.log.error(decorateError(message), 'Unauthorized request, is user/password correct?');
-        throw new InvalidCredentialsError(message.detail);
+        context.log.error(decorateError(message), 'Unauthorized request, is user/password correct?')
+        throw new InvalidCredentialsError(message.detail)
       case 'CHECKOUT__CUSTOMER_IS_INACTIVE':
-        context.log.error(decorateError(message), 'Customer is not active. Needs to confirm account in email.');
-        throw new InvalidCredentialsError(message.detail);
+        context.log.error(decorateError(message), 'Customer is not active. Needs to confirm account in email.')
+        throw new InvalidCredentialsError(message.detail)
       default:
-        context.log.fatal(decorateError(message), 'Cannot call this endpoint with authentication');
-        throw new UnknownError();
+        context.log.fatal(decorateError(message), 'Cannot call this endpoint with authentication')
+        throw new UnknownError()
     }
   })
 }

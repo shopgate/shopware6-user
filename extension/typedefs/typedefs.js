@@ -20,7 +20,7 @@ const {
 
 /**
  * @typedef {Object} SW6User.UserLoginStrategyToken
- * @property {string} token - shopware context token
+ 1 * @property {string} code - shopware context token
  */
 
 /**
