@@ -10,10 +10,6 @@ const { throwOnApiError } = require('./services/errorManager')
  * @throws {Error}
  */
 module.exports = async function (context) {
-  context.log.debug('logout called')
-  context.log.debug('logout called')
-  context.log.debug('logout called')
-
   if (!context.meta.userId) {
     context.log.warn('User is already logged out')
     return {

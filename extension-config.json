@@ -66,6 +66,17 @@
       ],
       "input": [],
       "output": []
+    },
+    {
+      "path": "extension/lib/hooks/getUserContext.js",
+      "description": "Loads the user context to make sure we have a SW logged in context token",
+      "hooks": [
+        "shopgate.user.getUser.v1:before"
+      ],
+      "input": [],
+      "output": [
+        {"key": "swContext"}
+      ]
     }
   ],
   "components": [

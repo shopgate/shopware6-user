@@ -1,33 +1,22 @@
 'use strict'
 
-const { getSessionContext } = require('@shopware-pwa/shopware-6-client')
-const { throwOnApiError } = require('./services/errorManager')
-const { UnauthorisedError } = require('./services/errorList')
-
 /**
  * @param {SW6User.PipelineContext} context
+ * @param {Object} input
+ * @param {SW6User.SWContext} input.swContext
  * @returns {Promise<SW6User.getUserResponse>}
  */
-module.exports = async (context) => {
-  console.log('getUser called')
-  console.log('getUser called')
-  console.log('getUser called')
-
-  const sessionContext = await getSessionContext().catch(error => throwOnApiError(error, context))
-  if (!sessionContext.customer) {
-    // todo: is this a possible scenario? If so, we need to do this for every pipeline
-    throw new UnauthorisedError('Permission denied: User is not logged in.')
-  }
+module.exports = async (context, input) => {
   return {
-    id: sessionContext.customer.id,
-    mail: sessionContext.customer.email,
-    firstName: sessionContext.customer.firstName,
-    lastName: sessionContext.customer.lastName,
-    birthday: processDate(sessionContext.customer.birthday),
+    id: input.swContext.customer.id,
+    mail: input.swContext.customer.email,
+    firstName: input.swContext.customer.firstName,
+    lastName: input.swContext.customer.lastName,
+    birthday: processDate(input.swContext.customer.birthday),
     userGroups: [
       {
-        id: sessionContext.currentCustomerGroup.id,
-        name: sessionContext.currentCustomerGroup.translated.name
+        id: input.swContext.currentCustomerGroup.id,
+        name: input.swContext.currentCustomerGroup.translated.name
       }
     ]
   }

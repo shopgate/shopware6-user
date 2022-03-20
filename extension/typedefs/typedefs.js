@@ -3,7 +3,8 @@
 const {
   ClientApiError,
   EntityError,
-  ShopwareError
+  ShopwareError,
+  SessionContext
 } = require('@shopware-pwa/commons')
 
 /**
@@ -45,3 +46,4 @@ const {
 /** @typedef {EntityError} SW6User.EntityError */
 /** @typedef {ShopwareError} SW6User.ShopwareError */
 /** @typedef {ClientApiError} SW6User.ClientApiError */
+/** @typedef {SessionContext} SW6User.SWContext */
