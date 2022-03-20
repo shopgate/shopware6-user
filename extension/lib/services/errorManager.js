@@ -15,6 +15,9 @@ const throwOnApiError = function (error, context) {
     throw new UnknownError()
   }
   switch (error.statusCode) {
+    case 401:
+      context.log.error(decorateError(error), 'Unauthorized request, is user/password correct?')
+      throw new InvalidCredentialsError(error.messages[0].detail)
     case 412:
       context.log.fatal(decorateError(error), 'Possibly SalesChannel access key is invalid.')
       throw new UnknownError()

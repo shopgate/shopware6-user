@@ -4,7 +4,8 @@ const {
   ClientApiError,
   EntityError,
   ShopwareError,
-  SessionContext
+  SessionContext,
+  ContextTokenResponse
 } = require('@shopware-pwa/commons')
 
 /**
@@ -47,3 +48,4 @@ const {
 /** @typedef {ShopwareError} SW6User.ShopwareError */
 /** @typedef {ClientApiError} SW6User.ClientApiError */
 /** @typedef {SessionContext} SW6User.SWContext */
+/** @typedef {ContextTokenResponse} SW6User.SWContextTokenResponse */

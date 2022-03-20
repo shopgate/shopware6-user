@@ -39,7 +39,8 @@ module.exports = async function (context, input) {
 /**
  * @param {SW6User.UserLoginInput} input
  * @param {SW6User.PipelineContext} context
- * @returns Promise<string>
+ * @returns Promise<SW6User.SWContextTokenResponse>
+ * @throws {Error}
  */
 const apiLogin = async function (input, context) {
   return login({ username: input.parameters.login, password: input.parameters.password })
