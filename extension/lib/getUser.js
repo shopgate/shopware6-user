@@ -3,20 +3,20 @@
 /**
  * @param {SW6User.PipelineContext} context
  * @param {Object} input
- * @param {SW6User.SWContext} input.swContext
+ * @param {SW6User.SWContext} swContext
  * @returns {Promise<SW6User.getUserResponse>}
  */
-module.exports = async (context, input) => {
+module.exports = async (context, { swContext }) => {
   return {
-    id: input.swContext.customer.id,
-    mail: input.swContext.customer.email,
-    firstName: input.swContext.customer.firstName,
-    lastName: input.swContext.customer.lastName,
-    birthday: processDate(input.swContext.customer.birthday),
+    id: swContext.customer.id,
+    mail: swContext.customer.email,
+    firstName: swContext.customer.firstName,
+    lastName: swContext.customer.lastName,
+    birthday: processDate(swContext.customer.birthday),
     userGroups: [
       {
-        id: input.swContext.currentCustomerGroup.id,
-        name: input.swContext.currentCustomerGroup.translated.name
+        id: swContext.currentCustomerGroup.id,
+        name: swContext.currentCustomerGroup.translated.name
       }
     ]
   }

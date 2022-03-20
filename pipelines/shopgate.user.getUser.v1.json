@@ -4,7 +4,7 @@
     "id": "shopgate.user.getUser.v1",
     "public": true,
     "input": [
-      {"key": "swContext", "id": "1000"}
+      {"key": "swContext", "id": "1000", "optional": true}
     ],
     "output": [
       {"key": "id", "id": "100"},
@@ -23,7 +23,7 @@
         "id": "@apite/shopware6-user",
         "path": "@apite/shopware6-user/lib/getUser.js",
         "input": [
-          {"key": "swContext", "id": "1000"}
+          {"key": "swContext", "id": "1000", "optional": true}
         ],
         "output": [
           {"key": "id", "id": "100"},
