@@ -44,6 +44,7 @@ declare namespace SW6User {
     endpoint: string
     accessToken: string
     languageId: string,
+    registrationPath: string
   }
 
   interface PipelineContextMeta {

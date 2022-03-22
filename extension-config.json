@@ -44,6 +44,20 @@
           "placeholder": "2fbb5fe2e29a4d70aa5854ce7ce3e20b"
         }
       }
+    },
+    "registrationPath": {
+      "type": "admin",
+      "destination": "backend",
+      "default": "/sgconnect/register",
+      "params": {
+        "type": "text",
+        "label": "Registration URL path",
+        "description": "Code will combine the Store URL + the provided path here",
+        "required": false,
+        "options": {
+          "placeholder": "/account/register?redirectTo=frontend.sgconnect.registered"
+        }
+      }
     }
   },
   "steps": [
@@ -53,7 +67,8 @@
       "hooks": [
         "shopgate.user.loginUser.v1:before",
         "shopgate.user.logoutUser.v1:before",
-        "shopgate.user.getUser.v1:before"
+        "shopgate.user.getUser.v1:before",
+        "shopgate.user.getRegistrationUrl.v1:before"
       ],
       "input": [],
       "output": []
