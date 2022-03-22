@@ -1,6 +1,7 @@
 const { config } = require('@shopware-pwa/shopware-6-client')
 
 /**
+ * @param {SW6User.PipelineContext} context
  * @return Promise<{url: string}>
  */
-module.exports = async () => ({ url: config.endpoint + '/account/register?redirectTo=frontend.sgconnect.registered' })
+module.exports = async (context) => ({ url: new URL(context.config.registrationPath, config.endpoint).href })
