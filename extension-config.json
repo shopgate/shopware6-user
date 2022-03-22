@@ -1,0 +1,89 @@
+{
+  "version": "0.1.0",
+  "id": "@apite/shopware6-user",
+  "trusted": true,
+  "configuration": {
+    "endpoint": {
+      "type": "admin",
+      "destination": "backend",
+      "default": null,
+      "params": {
+        "type": "text",
+        "label": "Store URL",
+        "description": "This is the URL of your frontend store. We will be making calls via Shopware's Store API.",
+        "required": true,
+        "options": {
+          "placeholder": "http://example.com"
+        }
+      }
+    },
+    "accessToken": {
+      "type": "admin",
+      "destination": "backend",
+      "default": null,
+      "params": {
+        "type": "text",
+        "label": "SalesChannel AccessToken",
+        "description": "Navigate to your Shopware backend. Go to the desired Sales Channel. In the 'API access' section copy the 'API access key' here",
+        "required": true,
+        "options": {
+          "placeholder": "SWSCMMJTYLVIT..."
+        }
+      }
+    },
+    "languageId": {
+      "type": "admin",
+      "destination": "backend",
+      "default": null,
+      "params": {
+        "type": "text",
+        "label": "Language ID",
+        "description": "If not provided it will use the default language of the SalesChannel. Otherwise please go to admin backend, Settings > Languages > [Language you want]. Copy the ID in the website URL bar, e.g. http://example.com/.../detail/2fbb5fe2e29a4d70aa5854ce7ce3e20b",
+        "required": false,
+        "options": {
+          "placeholder": "2fbb5fe2e29a4d70aa5854ce7ce3e20b"
+        }
+      }
+    }
+  },
+  "steps": [
+    {
+      "path": "extension/lib/hooks/authSetup.js",
+      "description": "Sets up authentication before every pipeline call",
+      "hooks": [
+        "shopgate.user.loginUser.v1:before",
+        "shopgate.user.logoutUser.v1:before",
+        "shopgate.user.getUser.v1:before"
+      ],
+      "input": [],
+      "output": []
+    },
+    {
+      "path": "extension/lib/hooks/isAuthorized.js",
+      "description": "There pipelines require the user to be logged in. We throw if not.",
+      "hooks": [
+        "shopgate.user.getUser.v1:before"
+      ],
+      "input": [],
+      "output": []
+    },
+    {
+      "path": "extension/lib/hooks/getUserContext.js",
+      "description": "Loads the user context to make sure we have a SW logged in context token",
+      "hooks": [
+        "shopgate.user.getUser.v1:before"
+      ],
+      "input": [],
+      "output": [
+        {"key": "swContext", "optional": false}
+      ]
+    }
+  ],
+  "components": [
+    {
+      "id": "RegisterSubscription",
+      "path": "frontend/Register/subscribers.js",
+      "type": "subscribers"
+    }
+  ]
+}

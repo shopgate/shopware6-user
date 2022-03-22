@@ -1,0 +1,42 @@
+{
+  "version": "1",
+  "pipeline": {
+    "id": "shopgate.user.getUser.v1",
+    "public": true,
+    "input": [
+      {"key": "swContext", "id": "1000", "optional": true}
+    ],
+    "output": [
+      {"key": "id", "id": "100"},
+      {"key": "mail", "id": "110"},
+      {"key": "firstName", "id": "120", "optional": true},
+      {"key": "lastName", "id": "130", "optional": true},
+      {"key": "gender", "id": "140", "optional": true},
+      {"key": "birthday", "id": "150", "optional": true},
+      {"key": "phone", "id": "160", "optional": true},
+      {"key": "userGroups", "id": "170", "optional": true},
+      {"key": "customAttributes", "id": "180", "optional": true}
+    ],
+    "steps": [
+      {
+        "type": "extension",
+        "id": "@apite/shopware6-user",
+        "path": "@apite/shopware6-user/lib/getUser.js",
+        "input": [
+          {"key": "swContext", "id": "1000", "optional": true}
+        ],
+        "output": [
+          {"key": "id", "id": "100"},
+          {"key": "mail", "id": "110"},
+          {"key": "firstName", "id": "120", "optional": true},
+          {"key": "lastName", "id": "130", "optional": true},
+          {"key": "gender", "id": "140", "optional": true},
+          {"key": "birthday", "id": "150", "optional": true},
+          {"key": "phone", "id": "160", "optional": true},
+          {"key": "userGroups", "id": "170", "optional": true},
+          {"key": "customAttributes", "id": "180", "optional": true}
+        ]
+      }
+    ]
+  }
+}

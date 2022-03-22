@@ -1,0 +1,304 @@
+{
+  "info": {
+    "_postman_id": "f71d0fc0-32a2-4fe8-9f7c-4e47a867370d",
+    "name": "SW6 - User",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "getUser",
+      "item": [
+        {
+          "name": "guest",
+          "item": [
+            {
+              "name": "customerLogout",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"Success property is a boolean\", function () {\r",
+                      "    const jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData).to.haveOwnProperty('success').to.be.a('boolean');\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}"
+                },
+                "url": {
+                  "raw": "{{domain}}{{endpoint_user_logout}}",
+                  "host": [
+                    "{{domain}}{{endpoint_user_logout}}"
+                  ]
+                },
+                "description": "customerLogout"
+              },
+              "response": []
+            },
+            {
+              "name": "getUser",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "var jsonData = pm.response.json();",
+                      "pm.test(\"User not logged in error, cannot retrieve data\", function () {",
+                      "    pm.expect(jsonData.error.code).to.be.eq('EACCESS');",
+                      "})"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}"
+                },
+                "url": {
+                  "raw": "{{domain}}{{endpoint_user_get}}",
+                  "host": [
+                    "{{domain}}{{endpoint_user_get}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "bad login",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 500\", function () {\r",
+                      "    pm.response.to.have.status(500);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"No login\", function () {\r",
+                      "    const jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData).to.haveOwnProperty('error');\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"strategy\": \"basic\",\n    \"parameters\": {\n        \"login\": \"{{username}}\",\n        \"password\": \"incorrect-pass\"\n    }\n}"
+                },
+                "url": {
+                  "raw": "{{domain}}{{endpoint_user_login}}",
+                  "host": [
+                    "{{domain}}{{endpoint_user_login}}"
+                  ]
+                },
+                "description": "customerLogin"
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "customer",
+          "item": [
+            {
+              "name": "customerLogin",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {\r",
+                      "    pm.response.to.have.status(200);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"Success property is not empty\", function () {\r",
+                      "    const jsonData = pm.response.json();\r",
+                      "    pm.expect(jsonData).to.haveOwnProperty('success').to.be.eq(true);\r",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n    \"strategy\": \"basic\",\n    \"parameters\": {\n        \"login\": \"{{username}}\",\n        \"password\": \"{{password}}\"\n    }\n}"
+                },
+                "url": {
+                  "raw": "{{domain}}{{endpoint_user_login}}",
+                  "host": [
+                    "{{domain}}{{endpoint_user_login}}"
+                  ]
+                },
+                "description": "customerLogin"
+              },
+              "response": []
+            },
+            {
+              "name": "getUser",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "const response = pm.response.json();",
+                      "const user = response;",
+                      "",
+                      "pm.test(\"Status code is 200\", function() {",
+                      "    pm.response.to.have.status(200);",
+                      "})",
+                      "pm.test(\"Test if response is okay, with body and json\", function() {",
+                      "    pm.response.to.be.ok,",
+                      "        pm.response.to.be.with.body,",
+                      "        pm.response.to.be.json;",
+                      "});",
+                      "",
+                      "pm.test(\"Make sure all required user data was properly set\", function() {",
+                      "    pm.expect(user.id).to.be.a('string', 'ID - not a string provided!').to.not.be.empty;",
+                      "    pm.expect(user.mail).to.be.a('string', 'Mail - not a string provided!').to.not.be.empty;",
+                      "});",
+                      "",
+                      "pm.test(\"Make sure all optional string based user data was properly set in the right format\", function() {",
+                      "    const generalKeys = [",
+                      "        'firstName',",
+                      "        'lastName'",
+                      "    ];",
+                      "    generalKeys.map(function(item) {",
+                      "        pm.expect(user[item]).to.be.a('string', item + ' - Not a string provided!');",
+                      "    });",
+                      "});",
+                      "",
+                      "pm.test(\"Make sure the userGroups are set as array\", function() {",
+                      "    pm.expect(user.userGroups).to.be.a('array');",
+                      "});",
+                      "",
+                      "// pm.test(\"Make sure the customAttributes are set as object\", function() {",
+                      "//     pm.expect(user.customAttributes).to.be.a('object');",
+                      "// });",
+                      "",
+                      "pm.test(\"Make sure that user Groups is set has an property id and name with the right string based value\", function() {",
+                      "    const testUserGroup = user.userGroups.pop();",
+                      "    pm.expect(testUserGroup).to.have.property('id');",
+                      "    pm.expect(testUserGroup).to.have.property('name');",
+                      "    pm.expect(testUserGroup.id).to.be.a('string', 'ID - not a string provided!');",
+                      "    pm.expect(testUserGroup.name).to.be.a('string', 'Name - not a string provided!');",
+                      "})"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}"
+                },
+                "url": {
+                  "raw": "{{domain}}{{endpoint_user_get}}",
+                  "host": [
+                    "{{domain}}{{endpoint_user_get}}"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "getRegistrationUrl",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const response = pm.response.json();",
+              "",
+              "pm.test(\"Status code is 200\", function() {",
+              "    pm.response.to.have.status(200);",
+              "})",
+              "",
+              "pm.test(\"has url\", function() {",
+              "    pm.expect(response.url).to.be.a('string').to.not.be.empty;",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{}"
+        },
+        "url": {
+          "raw": "{{domain}}{{endpoint_user_registrationUrl_get}}",
+          "host": [
+            "{{domain}}{{endpoint_user_registrationUrl_get}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

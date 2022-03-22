@@ -1,24 +1,28 @@
-# Shopgate Connect - Extension Boilerplate
+## Shopgate Connect Shopware 6 User Extension by Apite
 
-This boilerplate contains all important folders and files which are required for an extension.
+#### Development
 
-## Steps to start with the boilerplate
+You can set up the ENV variables when running `sgconnect` or use a local `.env` file.
 
-- Replace the `id` property in the file `extension-config.json` with the id of your extension
-- Replace the `version` property in the file `extension-config.json` with version of your wish
-- If you don't need a pipeline, remove the `awesomeOrganization.awesomePipeline.v1.json` in the `pipelines` folder
-- If you want to use a pipelines, modify the `awesomeOrganization.awesomePipeline.v1.json` in the `pipelines` folder and rename it to the new name 
+##### For inline, the command will look like this:
 
-## About Shopgate
+```shell
+SW_ENDPOINT=http://localhost SW_ACCESS_KEY=SWSCMMJTYLVIT1LBMJQWDLNSRG node $(which sgconnect) backend start
+```
 
-Shopgate is the leading mobile commerce platform.
+##### As an `.env` file.
 
-Shopgate offers everything online retailers need to be successful in mobile. Our leading
-software-as-a-service (SaaS) enables online stores to easily create, maintain and optimize native
-apps and mobile websites for the iPhone, iPad, Android smartphones and tablets.
+In `[root]/extension` create an `.env` file with content like this:
 
-## License
+```dotenv
+SW_ENDPOINT: "http://localhost"
+SW_ACCESS_KEY: "SWSCMMJTYLVIT1LBMJQWDLNSRG"
+SW_LANG_ID: "2fbb5fe2e29a4d70aa5854ce7ce3e20b"
+```
 
-Shopgate Connect - Extension Boilerplate is available under the Apache License, Version 2.0.
+Run:
 
-See the [LICENSE](./LICENSE) file for more information.
+```shell
+cd [root]/extension
+node -r dotenv/config $(which sgconnect) backend start
+```
