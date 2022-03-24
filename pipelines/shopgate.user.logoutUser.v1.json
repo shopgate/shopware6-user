@@ -11,9 +11,9 @@
       {
         "type": "extension",
         "id": "@apite/shopware6-user",
-        "path": "@apite/shopware6-user/lib/logout.js",
+        "path": "@apite/shopware6-user/src/logout.js",
         "input": [],
-        "output" : [
+        "output": [
           {"key": "contextToken", "id": "1030"}
         ]
       },
@@ -37,7 +37,7 @@
       {
         "type": "extension",
         "id": "@apite/shopware6-user",
-        "path": "@apite/shopware6-user/lib/checkAuthSuccess.js",
+        "path": "@apite/shopware6-user/src/checkAuthSuccess.js",
         "input": [
           {"key": "contextToken", "id": "1030"},
           {"key": "authSuccess", "id": "1010"},
