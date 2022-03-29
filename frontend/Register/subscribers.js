@@ -1,6 +1,6 @@
 // noinspection DuplicatedCode
 
-import { historyPop, historyPush } from '@shopgate/pwa-common/actions/router'
+import { historyPush } from '@shopgate/pwa-common/actions/router'
 import fetchRegisterUrl from '@shopgate/pwa-common/actions/user/fetchRegisterUrl'
 import { redirects } from '@shopgate/pwa-common/collections'
 import { LEGACY_URL } from '@shopgate/pwa-common/constants/Registration'
@@ -60,7 +60,6 @@ export default (subscribe) => {
    */
   subscribe(loginAfterRegisterRedirect$, ({ dispatch, getState }) => {
     const { state: { redirect: { location = '' } = {} } } = getCurrentRoute()
-    dispatch(historyPop())
 
     closeInAppBrowser(isAndroid(getState()))
 

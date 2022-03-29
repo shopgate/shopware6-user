@@ -44,6 +44,12 @@ const {
  * @property {string} name
  */
 
+/**
+ * @typedef {Object} SW6User.UrlResponse
+ * @property {string} url
+ * @property {?string} expires
+ */
+
 /** @typedef {EntityError} SW6User.EntityError */
 /** @typedef {ShopwareError} SW6User.ShopwareError */
 /** @typedef {ClientApiError} SW6User.ClientApiError */
