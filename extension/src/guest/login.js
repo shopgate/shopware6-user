@@ -1,8 +1,8 @@
 'use strict'
 
 const { login, getSessionContext, update } = require('@shopware-pwa/shopware-6-client')
-const { getContextToken } = require('./services/contextManager')
-const { throwOnApiError } = require('./services/errorManager')
+const { getContextToken } = require('../services/contextManager')
+const { throwOnApiError } = require('../services/errorManager')
 
 /**
  * @param {SW6User.PipelineContext} context
@@ -22,8 +22,10 @@ module.exports = async function (context, input) {
   if (input.strategy === 'auth_code' && input.parameters.code) {
     update({ contextToken: input.parameters.code })
     contextToken = input.parameters.code
+    context.log.debug('updating context from registration: ' + contextToken)
   } else {
     contextToken = await apiLogin(input, context)
+    context.log.debug('updating context from login: ' + contextToken)
   }
 
   const userId = await getSessionContext()

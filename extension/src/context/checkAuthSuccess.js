@@ -1,7 +1,7 @@
 'use strict'
 
-const { saveContextToken } = require('./services/contextManager')
-const { AuthFailedError } = require('./services/errorList')
+const { saveContextToken } = require('../services/contextManager')
+const { AuthFailedError } = require('../services/errorList')
 
 /**
  * @param {SW6User.PipelineContext} context

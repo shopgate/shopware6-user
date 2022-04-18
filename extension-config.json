@@ -74,15 +74,6 @@
       "output": []
     },
     {
-      "path": "extension/src/hooks/isAuthorized.js",
-      "description": "There pipelines require the user to be logged in. We throw if not.",
-      "hooks": [
-        "shopgate.user.getUser.v1:before"
-      ],
-      "input": [],
-      "output": []
-    },
-    {
       "path": "extension/src/hooks/getUserContext.js",
       "description": "Loads the user context to make sure we have a SW logged in context token",
       "hooks": [

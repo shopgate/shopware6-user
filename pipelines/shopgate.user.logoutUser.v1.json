@@ -11,7 +11,7 @@
       {
         "type": "extension",
         "id": "@apite/shopware6-user",
-        "path": "@apite/shopware6-user/src/logout.js",
+        "path": "@apite/shopware6-user/src/customer/logout.js",
         "input": [],
         "output": [
           {"key": "contextToken", "id": "1030"}
@@ -25,29 +25,9 @@
         ]
       },
       {
-        "type": "staticValue",
-        "input": [],
-        "values": [
-          {"key": "authType", "value": "Logout"}
-        ],
-        "output": [
-          {"key": "authType", "id": "1020"}
-        ]
-      },
-      {
-        "type": "extension",
-        "id": "@apite/shopware6-user",
-        "path": "@apite/shopware6-user/src/checkAuthSuccess.js",
-        "input": [
-          {"key": "contextToken", "id": "1030"},
-          {"key": "authSuccess", "id": "1010"},
-          {"key": "authType", "id": "1020"}
-        ],
-        "output": []
-      },
-      {
         "type": "pipeline",
-        "id": "apite.cart.setContextToken.v1",
+        "trusted": true,
+        "id": "apite.user.setContextToken.v1",
         "input": [
           {"key": "contextToken", "id": "1030"}
         ],

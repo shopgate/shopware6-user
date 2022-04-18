@@ -13,7 +13,7 @@
       {
         "type": "extension",
         "id": "@apite/shopware6-user",
-        "path": "@apite/shopware6-user/src/getRegistrationUrl.js",
+        "path": "@apite/shopware6-user/src/guest/getRegistrationUrl.js",
         "input": [
         ],
         "output": [

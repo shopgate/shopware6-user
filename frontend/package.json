@@ -1,13 +1,9 @@
 {
-  "name": "@shopgate/magento-user",
-  "version": "0.0.1",
+  "name": "@apite/shopware6-user",
+  "version": "0.1.0",
   "description": "prototype",
   "scripts": {
     "lint": "./node_modules/.bin/eslint --ignore-path ../.gitignore --ext .js --ext .jsx ."
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/shopgate/ext-magento-user.git"
   },
   "license": "Apache-2.0",
   "devDependencies": {
