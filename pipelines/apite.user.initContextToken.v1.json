@@ -1,0 +1,29 @@
+{
+  "version": "1",
+  "pipeline": {
+    "id": "apite.user.initContextToken.v1",
+    "public": true,
+    "input": [],
+    "output": [],
+    "steps": [
+      {
+        "id": "@apite/shopware6-user",
+        "path": "@apite/shopware6-user/src/context/getContextToken.js",
+        "type": "extension",
+        "input": [],
+        "output": [
+          {"key": "contextToken", "id": "105"}
+        ]
+      },
+      {
+        "type": "pipeline",
+        "trusted": true,
+        "id": "apite.user.setContextToken.v1",
+        "input": [
+          {"key": "contextToken", "id": "105"}
+        ],
+        "output": []
+      }
+    ]
+  }
+}
