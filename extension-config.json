@@ -65,19 +65,11 @@
       "path": "extension/src/hooks/authSetup.js",
       "description": "Sets up authentication before every pipeline call",
       "hooks": [
+        "apite.user.initContextToken.v1:before",
         "shopgate.user.loginUser.v1:before",
         "shopgate.user.logoutUser.v1:before",
         "shopgate.user.getUser.v1:before",
         "shopgate.user.getRegistrationUrl.v1:before"
-      ],
-      "input": [],
-      "output": []
-    },
-    {
-      "path": "extension/src/hooks/isAuthorized.js",
-      "description": "There pipelines require the user to be logged in. We throw if not.",
-      "hooks": [
-        "shopgate.user.getUser.v1:before"
       ],
       "input": [],
       "output": []
@@ -96,8 +88,18 @@
   ],
   "components": [
     {
+      "id": "ContextSubscription",
+      "path": "frontend/subscriptions/context.js",
+      "type": "subscribers"
+    },
+    {
       "id": "RegisterSubscription",
-      "path": "frontend/Register/subscribers.js",
+      "path": "frontend/subscriptions/register.js",
+      "type": "subscribers"
+    },
+    {
+      "id": "ErrorSubscriber",
+      "path": "frontend/subscriptions/errors.js",
       "type": "subscribers"
     }
   ]

@@ -21,7 +21,7 @@
       {
         "type": "extension",
         "id": "@apite/shopware6-user",
-        "path": "@apite/shopware6-user/src/getUser.js",
+        "path": "@apite/shopware6-user/src/customer/getUser.js",
         "input": [
           {"key": "swContext", "id": "1000", "optional": true}
         ],

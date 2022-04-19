@@ -14,7 +14,7 @@
       {
         "type": "extension",
         "id": "@apite/shopware6-user",
-        "path": "@apite/shopware6-user/src/login.js",
+        "path": "@apite/shopware6-user/src/guest/login.js",
         "input": [
           {"key": "strategy", "id": "1010"},
           {"key": "parameters", "id": "1020"}
@@ -46,7 +46,7 @@
       {
         "type": "extension",
         "id": "@apite/shopware6-user",
-        "path": "@apite/shopware6-user/src/checkAuthSuccess.js",
+        "path": "@apite/shopware6-user/src/context/checkAuthSuccess.js",
         "input": [
           {"key": "contextToken", "id": "1040"},
           {"key": "authSuccess", "id": "1050"},
@@ -56,7 +56,8 @@
       },
       {
         "type": "pipeline",
-        "id": "apite.cart.setContextToken.v1",
+        "trusted": true,
+        "id": "apite.user.setContextToken.v1",
         "input": [
           {"key": "contextToken", "id": "1040"}
         ],
