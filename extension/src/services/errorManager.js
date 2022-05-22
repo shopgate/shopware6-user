@@ -1,7 +1,7 @@
 'use strict'
 
 const { decorateError } = require('./logDecorator')
-const { UnknownError, InvalidCredentialsError, InactiveAccountError, LoginThrottledError } = require('./errorList')
+const { UnknownError, InvalidCredentialsError, InactiveAccountError, ThrottledError } = require('./errorList')
 
 /**
  * @param {SW6User.ClientApiError|Error} error
@@ -10,7 +10,7 @@ const { UnknownError, InvalidCredentialsError, InactiveAccountError, LoginThrott
  * @throws {Error}
  */
 const throwOnApiError = function (error, context) {
-  if (!error.statusCode) {
+  if (!error.statusCode || !error.messages || (error.messages && error.messages.length === 0)) {
     context.log.error(decorateError(error))
     throw new UnknownError()
   }
@@ -19,6 +19,9 @@ const throwOnApiError = function (error, context) {
     case 412:
       context.log.fatal(decorateError(error), 'Possibly SalesChannel access key is invalid.')
       throw new UnknownError()
+    case 429:
+      context.log.fatal(decorateError(error), 'Too many API requests. SW rate limiter is blocking calls.')
+      throw new ThrottledError()
     case 500:
     default:
       throwOnMessage(error.messages, context)
@@ -34,13 +37,9 @@ const throwOnMessage = function (messages, context) {
   messages.forEach(message => {
     switch (message.code) {
       case 'CHECKOUT__CUSTOMER_NOT_LOGGED_IN':
-        // do not need to throw as this is a soft error, maybe?
-        context.log.debug(decorateError(message), 'Logged in SG, but contextToken is of a guest. Cannot logout.')
+        context.log.debug(decorateError(message), 'Logged in SG, but contextToken is of a guest.')
+        // a soft error when trying to log out a customer that is already using a guest token
         break
-      case 'FRAMEWORK__AUTH_THROTTLED':
-      case 'CHECKOUT__CUSTOMER_AUTH_THROTTLED':
-        context.log.debug(decorateError(message), 'Too many login attempts. Need to wait.')
-        throw new LoginThrottledError(message.meta.params)
       case 'CHECKOUT__CUSTOMER_AUTH_BAD_CREDENTIALS':
         context.log.error(decorateError(message), 'Unauthorized request, is user/password correct?')
         throw new InvalidCredentialsError()

@@ -1,18 +1,14 @@
 {
   "SW6User": {
-    "general": {
-      "404ErrorPageHeader": "Seite nicht gefunden",
-      "404ErrorDescription": "Es tut uns leid, die Seite, die Sie suchen, wurde nicht gefunden. Sie existiert vielleicht nicht mehr oder wurde verschoben."
-    },
-    "error": {
+    "notice": {
       "message-default": "Leider ist etwas schief gelaufen",
       "message-403": "Die Sitzung ist abgelaufen. Bitte kehren Sie zur letzten Seite zurück neu und versuchen Sie  es erneut.",
-      "rateLimitExceeded": "Zu viele Anfragen. Bitte warten Sie %seconds% Sekunden, bevor Sie es erneut versuchen."
-    },
-    "account": {
+      "rateLimitExceeded": "Zu viele Anfragen. Bitte warten, bevor Sie es erneut versuchen.",
       "loginBadCredentials": "Es konnte kein Account mit den angegebenen Zugangsdaten gefunden werden.",
-      "loginThrottled": "Zu viele Anmeldeversuche. Bitte warten Sie %seconds% Sekunden, bevor Sie erneut versuchen, sich anzumelden.",
       "inactiveAccountAlert": "Ihr Kundenkonto wurde noch nicht aktiviert. Wir haben Ihnen einen Aktivierungslink geschickt. Bitte prüfen Sie Ihr E-Mail-Postfach, um die Anmeldung abzuschließen!"
+    },
+    "app": {
+      "not-in-sync": "Die Sitzung ist abgelaufen. Bitte loggen Sie sich erneut ein."
     }
   }
 }

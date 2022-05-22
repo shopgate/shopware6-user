@@ -9,8 +9,8 @@ class TranslatableError extends Error {
   }
 }
 
-class LoginThrottledError extends TranslatableError {
-  constructor (params) { super('SW6User.notice.loginThrottled', 'ELOGINTHROTTLED', params) }
+class ThrottledError extends TranslatableError {
+  constructor () { super('SW6User.notice.rateLimitExceeded', 'EREQUESTTHROTTLED') }
 }
 
 class InvalidCredentialsError extends TranslatableError {
@@ -38,6 +38,6 @@ module.exports = {
   ContextDeSyncError,
   InactiveAccountError,
   InvalidCredentialsError,
-  LoginThrottledError,
+  ThrottledError,
   UnknownError
 }

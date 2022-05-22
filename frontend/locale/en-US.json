@@ -3,9 +3,8 @@
     "notice": {
       "message-default": "Unfortunately, something went wrong.",
       "message-403": "Your session has expired. Please return to the last page and try again.",
-      "rateLimitExceeded": "Too many requests. Please wait %seconds% seconds before trying again.",
+      "rateLimitExceeded": "Too many requests. Please wait before trying again.",
       "loginBadCredentials": "Could not find an account that matches the given credentials.",
-      "loginThrottled": "Too many login attempts. Please wait %seconds% seconds before trying to log in again.",
       "inactiveAccountAlert": "Your customer account has not been activated yet. We have sent a confirmation email containing an activation link. Please check your inbox and click the link to complete the sign-up!"
     },
     "app": {
