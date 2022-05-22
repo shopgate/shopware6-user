@@ -1,20 +1,15 @@
 {
   "SW6User": {
-    "general": {
-      "404ErrorPageHeader": "Page not found",
-      "404ErrorDescription": "We are sorry, the page you're looking for could not be found. It may no longer exist or may have been moved.",
-      "maintenanceModeHeader": "Maintenance mode",
-      "maintenanceModeDescription": "We are currently updating this site. Please check back later."
-    },
-    "error": {
+    "notice": {
       "message-default": "Unfortunately, something went wrong.",
       "message-403": "Your session has expired. Please return to the last page and try again.",
-      "rateLimitExceeded": "Too many requests. Please wait %seconds% seconds before trying again."
-    },
-    "account": {
+      "rateLimitExceeded": "Too many requests. Please wait %seconds% seconds before trying again.",
       "loginBadCredentials": "Could not find an account that matches the given credentials.",
       "loginThrottled": "Too many login attempts. Please wait %seconds% seconds before trying to log in again.",
       "inactiveAccountAlert": "Your customer account has not been activated yet. We have sent a confirmation email containing an activation link. Please check your inbox and click the link to complete the sign-up!"
+    },
+    "app": {
+      "not-in-sync": "Unfortunately the session expired, you will need to log back in."
     }
   }
 }

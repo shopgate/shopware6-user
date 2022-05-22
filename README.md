@@ -26,3 +26,7 @@ Run:
 cd [root]/extension
 node -r dotenv/config $(which sgconnect) backend start
 ```
+
+---
+### Known Errors
+* `No route found for "GET http://example.com/store-api/sgconnect/login/token"` - SW6 Connect plugin is not enabled/installed

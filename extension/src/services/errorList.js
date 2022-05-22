@@ -1,40 +1,43 @@
 'use strict'
 
-class AuthFailedError extends Error {
-  constructor (message) {
-    // todo: translate
-    super(message || 'Something went wrong during authorization.')
-    this.code = 'EAUTHFAILED'
+class TranslatableError extends Error {
+  constructor (message, code, params = {}) {
+    super()
+    this.message = message
+    this.code = code
+    this.params = params
   }
 }
 
-class InvalidCredentialsError extends Error {
-  constructor (message) {
-    // todo: translate
-    super(message || 'The given credentials are wrong or do not exist.')
-    this.code = 'EINVALIDCREDENTIALS'
-  }
+class LoginThrottledError extends TranslatableError {
+  constructor (params) { super('SW6User.notice.loginThrottled', 'ELOGINTHROTTLED', params) }
 }
 
-class UnauthorisedError extends Error {
-  constructor () {
-    super('Permission denied.')
-    this.code = 'EACCESS'
-  }
+class InvalidCredentialsError extends TranslatableError {
+  constructor () { super('SW6User.notice.loginBadCredentials', 'EBADCREDENTIALS') }
 }
 
-class UnknownError extends Error {
-  constructor () {
-    // todo: translate
-    super('An internal error occurred.')
-    this.code = 'EUNKNOWN'
-    this.displayMessage = null
-  }
+class InactiveAccountError extends TranslatableError {
+  constructor () { super('SW6User.notice.inactiveAccountAlert', 'EINACTIVEACCOUNT') }
+}
+
+class UnknownError extends TranslatableError {
+  constructor () { super('SW6User.notice.message-default', 'EUNKNOWN') }
+}
+
+/**
+ * A state of the app that requires the current App user to be logged out.
+ * Our frontend subscriber handles this error. Cart ext also has a similar
+ * catcher, so it's possible this error may not be fired.
+ */
+class ContextDeSyncError extends TranslatableError {
+  constructor () { super('SW6User.app.not-in-sync', 'EUSERDESYNC') }
 }
 
 module.exports = {
-  AuthFailedError,
+  ContextDeSyncError,
+  InactiveAccountError,
   InvalidCredentialsError,
-  UnauthorisedError,
+  LoginThrottledError,
   UnknownError
 }
