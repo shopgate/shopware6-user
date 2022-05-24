@@ -21,6 +21,13 @@ class InactiveAccountError extends TranslatableError {
   constructor () { super('SW6User.notice.inactiveAccountAlert', 'EINACTIVEACCOUNT') }
 }
 
+/**
+ * Code handled by theme, guest trying to call customer pipelines
+ */
+class UnauthorizedError extends TranslatableError {
+  constructor () { super('', 'EACCESS') }
+}
+
 class UnknownError extends TranslatableError {
   constructor () { super('SW6User.notice.message-default', 'EUNKNOWN') }
 }
@@ -39,5 +46,6 @@ module.exports = {
   InactiveAccountError,
   InvalidCredentialsError,
   ThrottledError,
+  UnauthorizedError,
   UnknownError
 }
