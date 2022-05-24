@@ -26,3 +26,10 @@ Run:
 cd [root]/extension
 node -r dotenv/config $(which sgconnect) backend start
 ```
+
+---
+### Known Errors
+* `No route found for "GET http://example.com/store-api/sgconnect/login/token"` - SW6 Connect plugin is not
+  enabled/installed
+* `Cannot read property 'data' of undefined` - this error happens because Shopware 6 API client receives an error
+  format it did not expect. This is a little tricky to work around!

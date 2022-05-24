@@ -1,7 +1,8 @@
 'use strict'
 
 const { saveContextToken } = require('../services/contextManager')
-const { AuthFailedError } = require('../services/errorList')
+const { UnknownError } = require('../services/errorList')
+const { decorateMessage } = require('../services/logDecorator')
 
 /**
  * @param {SW6User.PipelineContext} context
@@ -13,8 +14,8 @@ const { AuthFailedError } = require('../services/errorList')
  */
 module.exports = async function (context, input) {
   if (input.authType === 'Login' && input.authSuccess !== true) {
-    context.log.error(input.authType + ': Auth step finished unsuccessfully.')
-    throw new AuthFailedError('Authorisation failed.')
+    context.log.error(decorateMessage(input.authType + ': Auth step finished unsuccessfully.'))
+    throw new UnknownError()
   }
 
   await saveContextToken(input.contextToken, context)

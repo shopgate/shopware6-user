@@ -1,7 +1,7 @@
 'use strict'
 
 const { decorateError } = require('./logDecorator')
-const { UnknownError, InvalidCredentialsError } = require('./errorList')
+const { UnknownError, InvalidCredentialsError, InactiveAccountError, ThrottledError } = require('./errorList')
 
 /**
  * @param {SW6User.ClientApiError|Error} error
@@ -10,17 +10,18 @@ const { UnknownError, InvalidCredentialsError } = require('./errorList')
  * @throws {Error}
  */
 const throwOnApiError = function (error, context) {
-  if (!error.statusCode) {
+  if (!error.statusCode || !error.messages || (error.messages && error.messages.length === 0)) {
     context.log.error(decorateError(error))
     throw new UnknownError()
   }
+  standardizeErrorMessages(error)
   switch (error.statusCode) {
-    case 401:
-      context.log.error(decorateError(error), 'Unauthorized request, is user/password correct?')
-      throw new InvalidCredentialsError(error.messages[0].detail)
     case 412:
       context.log.fatal(decorateError(error), 'Possibly SalesChannel access key is invalid.')
       throw new UnknownError()
+    case 429:
+      context.log.fatal(decorateError(error), 'Too many API requests. SW rate limiter is blocking calls.')
+      throw new ThrottledError()
     case 500:
     default:
       throwOnMessage(error.messages, context)
@@ -36,22 +37,33 @@ const throwOnMessage = function (messages, context) {
   messages.forEach(message => {
     switch (message.code) {
       case 'CHECKOUT__CUSTOMER_NOT_LOGGED_IN':
-        // do not need to throw as this is a soft error, maybe?
-        context.log.debug(decorateError(message), 'Logged in SG, but contextToken is of a guest. Cannot logout.')
+        context.log.debug(decorateError(message), 'Logged in SG, but contextToken is of a guest.')
+        // a soft error when trying to log out a customer that is already using a guest token
         break
-      case 'CHECKOUT__CUSTOMER_AUTH_THROTTLED':
-        context.log.debug(decorateError(message), 'Too many login attempts. Need to wait.')
-        throw new UnknownError()
       case 'CHECKOUT__CUSTOMER_AUTH_BAD_CREDENTIALS':
         context.log.error(decorateError(message), 'Unauthorized request, is user/password correct?')
-        throw new InvalidCredentialsError(message.detail)
+        throw new InvalidCredentialsError()
       case 'CHECKOUT__CUSTOMER_IS_INACTIVE':
         context.log.error(decorateError(message), 'Customer is not active. Needs to confirm account in email.')
-        throw new InvalidCredentialsError(message.detail)
+        throw new InactiveAccountError()
       default:
-        context.log.fatal(decorateError(message), 'Cannot call this endpoint with authentication')
+        context.log.fatal(decorateError(message), 'Unmapped error')
         throw new UnknownError()
     }
+  })
+}
+
+/**
+ * Helps fix inconsistent SW API returned messages
+ *
+ * @param {SW6User.ClientApiError} error
+ */
+const standardizeErrorMessages = (error) => {
+  error.messages.forEach(message => {
+    if (message.code === '0' && message.status === '401') {
+      message.code = 'CHECKOUT__CUSTOMER_AUTH_BAD_CREDENTIALS'
+    }
+    return message
   })
 }
 

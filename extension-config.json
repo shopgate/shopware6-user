@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.1.0-beta.1",
   "id": "@apite/shopware6-user",
   "trusted": true,
   "configuration": {
@@ -87,6 +87,16 @@
     }
   ],
   "components": [
+    {
+      "id": "en-US",
+      "path": "frontend/locale/en-US.json",
+      "type": "translations"
+    },
+    {
+      "id": "de-DE",
+      "path": "frontend/locale/de-DE.json",
+      "type": "translations"
+    },
     {
       "id": "ContextSubscription",
       "path": "frontend/subscriptions/context.js",
