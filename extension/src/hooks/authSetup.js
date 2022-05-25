@@ -26,11 +26,11 @@ module.exports = async (context) => {
     }
     // If not in storage, ask SW to give us one
     return getSessionContext()
-      .then(swContext => {
-        saveContextToken(swContext.token, context)
+      .then(async swContext => {
+        await saveContextToken(swContext.token, context)
         return swContext.token
       })
-      .catch(e => context.log.info(decorateError(e), 'Could not get session context'))
+      .catch(e => context.log.warn(decorateError(e), 'Could not get session context'))
   })
   setup({
     endpoint,

@@ -1,5 +1,7 @@
 'use strict'
 
+const { decorateError } = require('./logDecorator')
+
 /**
  * Select storage to use: device or user (if logged in)
  *
@@ -18,7 +20,7 @@ const _getStorage = context => context.meta.userId ? context.storage.user : cont
  */
 const saveContextToken = async function (contextToken, context) {
   await _getStorage(context).set('contextToken', contextToken).catch(err => {
-    context.log.error(`Failed to save Shopware checkout token. Error: '${err.message}'`)
+    context.log.error(decorateError(err), 'Failed to save context token.')
   })
 }
 
@@ -26,6 +28,6 @@ const saveContextToken = async function (contextToken, context) {
  * @param {SW6User.PipelineContext} context
  * @return {Promise<string>}
  */
-const getContextToken = async context => _getStorage(context).get('contextToken')
+const getContextToken = async context => await _getStorage(context).get('contextToken')
 
 module.exports = { getContextToken, saveContextToken }
