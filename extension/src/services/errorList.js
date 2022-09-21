@@ -10,15 +10,15 @@ class TranslatableError extends Error {
 }
 
 class ThrottledError extends TranslatableError {
-  constructor () { super('SW6User.notice.rateLimitExceeded', 'EREQUESTTHROTTLED') }
+  constructor () { super('ApiteSW6Utility.notice.rateLimitExceeded', 'EREQUESTTHROTTLED') }
 }
 
 class InvalidCredentialsError extends TranslatableError {
-  constructor () { super('SW6User.notice.loginBadCredentials', 'EBADCREDENTIALS') }
+  constructor () { super('ApiteSW6Utility.notice.loginBadCredentials', 'EBADCREDENTIALS') }
 }
 
 class InactiveAccountError extends TranslatableError {
-  constructor () { super('SW6User.notice.inactiveAccountAlert', 'EINACTIVEACCOUNT') }
+  constructor () { super('ApiteSW6Utility.notice.inactiveAccountAlert', 'EINACTIVEACCOUNT') }
 }
 
 /**
@@ -29,7 +29,7 @@ class UnauthorizedError extends TranslatableError {
 }
 
 class UnknownError extends TranslatableError {
-  constructor () { super('SW6User.notice.message-default', 'EUNKNOWN') }
+  constructor () { super('ApiteSW6Utility.notice.message-default', 'EUNKNOWN') }
 }
 
 /**
@@ -38,7 +38,7 @@ class UnknownError extends TranslatableError {
  * catcher, so it's possible this error may not be fired.
  */
 class ContextDeSyncError extends TranslatableError {
-  constructor () { super('SW6User.app.not-in-sync', 'EUSERDESYNC') }
+  constructor () { super('ApiteSW6Utility.app.not-in-sync', 'EUSERDESYNC') }
 }
 
 module.exports = {
