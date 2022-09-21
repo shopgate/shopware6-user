@@ -86,12 +86,12 @@
   "components": [
     {
       "id": "en-US",
-      "path": "frontend/locale/en-US.json",
+      "path": "extension/node_modules/@apite/shopware6-utility/src/locale/en-US.json",
       "type": "translations"
     },
     {
       "id": "de-DE",
-      "path": "frontend/locale/de-DE.json",
+      "path": "extension/node_modules/@apite/shopware6-utility/src/locale/de-DE.json",
       "type": "translations"
     },
     {
