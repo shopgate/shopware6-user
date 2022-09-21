@@ -2,10 +2,10 @@
 
 const {
   apiManager: { createApiConfig },
-  contextManager: { getContextToken }
+  contextManager: { getContextToken },
+  errorManager: { throwOnApiError }
 } = require('@apite/shopware6-utility')
 const { login, getSessionContext, update } = require('@shopware-pwa/shopware-6-client')
-const { throwOnApiError } = require('../services/errorManager')
 
 /**
  * We do not want to save any tokens here as we will be saving

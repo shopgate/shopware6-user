@@ -1,6 +1,10 @@
-const { apiManager: { createApiConfig } } = require('@apite/shopware6-utility')
+'use strict'
+
+const {
+  apiManager: { createApiConfig },
+  errorManager: { throwOnApiError }
+} = require('@apite/shopware6-utility')
 const { connectApiManager: { getLoginToken } } = require('@apite/shopware6-utility')
-const { throwOnApiError } = require('../services/errorManager')
 
 /**
  * @param {ApiteSW6Helper.PipelineContext} context

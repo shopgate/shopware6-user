@@ -1,7 +1,9 @@
 'use strict'
 
-const { contextManager: { saveContextToken } } = require('@apite/shopware6-utility')
-const { UnknownError } = require('../services/errorList')
+const {
+  contextManager: { saveContextToken },
+  errorList: { UnknownError }
+} = require('@apite/shopware6-utility')
 const { decorateMessage } = require('../services/logDecorator')
 
 /**

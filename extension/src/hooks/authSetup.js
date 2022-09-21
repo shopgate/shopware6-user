@@ -2,11 +2,11 @@
 
 const {
   contextManager: { getContextToken },
-  apiManager: { createApiConfig }
+  apiManager: { createApiConfig },
+  errorManager: { throwOnApiError }
 } = require('@apite/shopware6-utility')
 const { getCart } = require('@shopware-pwa/shopware-6-client')
 const nanoid = require('nanoid/async')
-const { throwOnApiError } = require('../services/errorManager')
 
 /**
  * Every SW6 API call saves the token to storage afterwards

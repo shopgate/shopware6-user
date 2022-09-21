@@ -1,9 +1,11 @@
 'use strict'
 
-const { apiManager: { createApiConfig } } = require('@apite/shopware6-utility')
+const {
+  apiManager: { createApiConfig },
+  errorManager: { throwOnApiError },
+  errorList: { ContextDeSyncError, UnauthorizedError }
+} = require('@apite/shopware6-utility')
 const { getSessionContext } = require('@shopware-pwa/shopware-6-client')
-const { throwOnApiError } = require('../services/errorManager')
-const { ContextDeSyncError, UnauthorizedError } = require('../services/errorList')
 const { decorateMessage } = require('../services/logDecorator')
 
 /**
