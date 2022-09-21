@@ -1,6 +1,6 @@
 'use strict'
 
-const { apiManager: { createApiConfig } } = require('@apite/sw6-webcheckout-helper')
+const { apiManager: { createApiConfig } } = require('@apite/shopware6-utility')
 const { logout } = require('@shopware-pwa/shopware-6-client')
 const { decorateError } = require('../services/logDecorator')
 

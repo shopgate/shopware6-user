@@ -3,7 +3,7 @@
 const {
   contextManager: { getContextToken },
   apiManager: { createApiConfig }
-} = require('@apite/sw6-webcheckout-helper')
+} = require('@apite/shopware6-utility')
 const { getCart } = require('@shopware-pwa/shopware-6-client')
 const nanoid = require('nanoid/async')
 const { throwOnApiError } = require('../services/errorManager')

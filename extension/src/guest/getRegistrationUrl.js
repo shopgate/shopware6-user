@@ -1,5 +1,5 @@
-const { apiManager: { createApiConfig } } = require('@apite/sw6-webcheckout-helper')
-const { connectApiManager: { getLoginToken } } = require('@apite/sw6-webcheckout-helper')
+const { apiManager: { createApiConfig } } = require('@apite/shopware6-utility')
+const { connectApiManager: { getLoginToken } } = require('@apite/shopware6-utility')
 const { throwOnApiError } = require('../services/errorManager')
 
 /**

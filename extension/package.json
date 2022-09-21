@@ -10,7 +10,7 @@
     "frontend": "sgconnect frontend start"
   },
   "dependencies": {
-    "@apite/sw6-webcheckout-helper": "file:../../sw6-webcheckout-helper",
+    "@apite/shopware6-utility": "file:../../shopware6-utility",
     "@shopware-pwa/shopware-6-client": "^1.5.3",
     "nanoid": "2.1.11"
   },

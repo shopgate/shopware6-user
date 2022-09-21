@@ -1,6 +1,6 @@
 'use strict'
 
-const { contextManager: { saveContextToken } } = require('@apite/sw6-webcheckout-helper')
+const { contextManager: { saveContextToken } } = require('@apite/shopware6-utility')
 
 /**
  * @param {ApiteSW6Helper.PipelineContext} context
@@ -9,4 +9,4 @@ const { contextManager: { saveContextToken } } = require('@apite/sw6-webcheckout
  * @returns {Promise<void>}
  */
 module.exports = async (context, { contextToken }) =>
-  await saveContextToken(contextToken, context)
+  saveContextToken(contextToken, context)

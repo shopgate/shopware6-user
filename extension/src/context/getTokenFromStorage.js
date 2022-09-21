@@ -1,6 +1,6 @@
 'use strict'
 
-const { contextManager: { getContextToken: getTokenFromStorage } } = require('@apite/sw6-webcheckout-helper')
+const { contextManager: { getContextToken: getTokenFromStorage } } = require('@apite/shopware6-utility')
 
 /**
  * Initializes context token on App start, other

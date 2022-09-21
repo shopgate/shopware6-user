@@ -3,7 +3,7 @@
 const {
   apiManager: { createApiConfig },
   contextManager: { getContextToken }
-} = require('@apite/sw6-webcheckout-helper')
+} = require('@apite/shopware6-utility')
 const { login, getSessionContext, update } = require('@shopware-pwa/shopware-6-client')
 const { throwOnApiError } = require('../services/errorManager')
 

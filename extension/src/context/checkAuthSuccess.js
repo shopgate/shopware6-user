@@ -1,6 +1,6 @@
 'use strict'
 
-const { contextManager: { saveContextToken } } = require('@apite/sw6-webcheckout-helper')
+const { contextManager: { saveContextToken } } = require('@apite/shopware6-utility')
 const { UnknownError } = require('../services/errorList')
 const { decorateMessage } = require('../services/logDecorator')
 
