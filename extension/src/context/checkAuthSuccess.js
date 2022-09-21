@@ -1,11 +1,11 @@
 'use strict'
 
-const { saveContextToken } = require('../services/contextManager')
+const { contextManager: { saveContextToken } } = require('@apite/sw6-webcheckout-helper')
 const { UnknownError } = require('../services/errorList')
 const { decorateMessage } = require('../services/logDecorator')
 
 /**
- * @param {SW6User.PipelineContext} context
+ * @param {ApiteSW6Helper.PipelineContext} context
  * @param {Object} input
  * @param {boolean} input.authSuccess
  * @param {string} input.authType

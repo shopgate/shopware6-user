@@ -1,16 +1,17 @@
-const { config } = require('@shopware-pwa/shopware-6-client')
-const { getLoginToken } = require('../services/connectApiManager')
+const { apiManager: { createApiConfig } } = require('@apite/sw6-webcheckout-helper')
+const { connectApiManager: { getLoginToken } } = require('@apite/sw6-webcheckout-helper')
 const { throwOnApiError } = require('../services/errorManager')
 
 /**
- * @param {SW6User.PipelineContext} context
+ * @param {ApiteSW6Helper.PipelineContext} context
  * @return Promise<SW6User.UrlResponse>
  */
 module.exports = async (context) => {
-  const { token, expiration } = await getLoginToken().catch(e => throwOnApiError(e, context))
-  const url = new URL('sgconnect/login', config.endpoint)
+  const api = await createApiConfig(context)
+  const { token, expiration } = await getLoginToken(api).catch(e => throwOnApiError(e, context))
+  const url = new URL('sgconnect/login', api.config.endpoint)
   url.searchParams.append('token', token)
-  const registrationUrl = new URL(context.config.registrationPath, config.endpoint).href
+  const registrationUrl = new URL(context.config.registrationPath, api.config.endpoint).href
   url.searchParams.append('redirectTo', registrationUrl)
 
   return {

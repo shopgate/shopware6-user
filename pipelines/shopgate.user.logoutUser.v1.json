@@ -13,15 +13,22 @@
         "id": "@apite/shopware6-user",
         "path": "@apite/shopware6-user/src/customer/logout.js",
         "input": [],
-        "output": [
-          {"key": "contextToken", "id": "1030"}
-        ]
+        "output": []
       },
       {
         "type": "auth",
         "input": [],
         "output": [
           {"key": "success", "id": "1010"}
+        ]
+      },
+      {
+        "type": "extension",
+        "id": "@apite/shopware6-user",
+        "path": "@apite/shopware6-user/src/context/getTokenFromSW6.js",
+        "input": [],
+        "output": [
+          {"key": "contextToken", "id": "1030"}
         ]
       },
       {

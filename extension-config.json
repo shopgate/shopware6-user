@@ -65,10 +65,7 @@
       "path": "extension/src/hooks/authSetup.js",
       "description": "Sets up authentication before every pipeline call",
       "hooks": [
-        "apite.user.initContextToken.v1:before",
-        "shopgate.user.loginUser.v1:before",
-        "shopgate.user.logoutUser.v1:before",
-        "shopgate.user.getUser.v1:before",
+        "shopgate.user.logoutUser.v1:after",
         "shopgate.user.getRegistrationUrl.v1:before"
       ],
       "input": [],
@@ -96,11 +93,6 @@
       "id": "de-DE",
       "path": "frontend/locale/de-DE.json",
       "type": "translations"
-    },
-    {
-      "id": "ContextSubscription",
-      "path": "frontend/subscriptions/context.js",
-      "type": "subscribers"
     },
     {
       "id": "RegisterSubscription",

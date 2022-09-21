@@ -8,7 +8,7 @@
     "steps": [
       {
         "id": "@apite/shopware6-user",
-        "path": "@apite/shopware6-user/src/context/getContextToken.js",
+        "path": "@apite/shopware6-user/src/context/getTokenFromStorage.js",
         "type": "extension",
         "input": [],
         "output": [

@@ -1,5 +1,6 @@
 'use strict'
 
+const { apiManager: { createApiConfig } } = require('@apite/sw6-webcheckout-helper')
 const { getSessionContext } = require('@shopware-pwa/shopware-6-client')
 const { throwOnApiError } = require('../services/errorManager')
 const { ContextDeSyncError, UnauthorizedError } = require('../services/errorList')
@@ -8,16 +9,18 @@ const { decorateMessage } = require('../services/logDecorator')
 /**
  * This hook needs to be applied to all customer pipelines
  *
- * @param {SW6User.PipelineContext} context
+ * @param {ApiteSW6Helper.PipelineContext} context
  * @returns {Promise<{swContext: SW6User.SWContext}>}
  * @throws {ContextDeSyncError|UnknownError}
  */
 module.exports = async (context) => {
-  const swContext = await getSessionContext().catch(error => throwOnApiError(error, context))
-
   if (!context.meta.userId) {
     throw new UnauthorizedError()
   }
+
+  const apiConfig = await createApiConfig(context)
+  const swContext = await getSessionContext(apiConfig)
+    .catch(error => throwOnApiError(error, context))
 
   if (context.meta.userId && !swContext.customer) {
     context.log.error(decorateMessage('Logged in the app, but contextToken is of a guest'))
