@@ -29,6 +29,7 @@ module.exports = async function (context, input) {
   if (input.strategy === 'auth_code' && input.parameters.code) {
     update({ contextToken: input.parameters.code })
     contextToken = input.parameters.code
+    apiConfig.update({ contextToken })
     context.log.debug('updating context from registration: ' + contextToken)
   } else {
     contextToken = await apiLogin(input, context, apiConfig)
@@ -52,8 +53,7 @@ module.exports = async function (context, input) {
  * @returns Promise<SW6User.SWContextTokenResponse>
  * @throws {Error}
  */
-const apiLogin = async function (input, context, config) {
-  return login({ username: input.parameters.login, password: input.parameters.password }, config)
+const apiLogin = async ({ parameters }, context, config) =>
+  login({ username: parameters.login, password: parameters.password }, config)
     .then(response => response.contextToken)
     .catch(err => throwOnApiError(err, context))
-}
