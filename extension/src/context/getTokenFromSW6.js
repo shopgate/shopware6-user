@@ -7,8 +7,8 @@ const {
 const { getSessionContext } = require('@shopware-pwa/shopware-6-client')
 
 /**
- * @param {ApiteSW6Helper.PipelineContext} context
- * @returns {Promise<{contextToken: string}>}
+ * @param {ApiteSW6Utility.PipelineContext} context
+ * @returns {Promise<ApiteSW6Utility.ContextToken>}
  * @throws {Error}
  */
 module.exports = async context => {

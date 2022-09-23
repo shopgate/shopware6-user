@@ -11,9 +11,9 @@ const { decorateMessage } = require('../services/logDecorator')
 /**
  * This hook needs to be applied to all customer pipelines
  *
- * @param {ApiteSW6Helper.PipelineContext} context
- * @returns {Promise<{swContext: SW6User.SWContext}>}
- * @throws {ContextDeSyncError|UnknownError}
+ * @param {ApiteSW6Utility.PipelineContext} context
+ * @returns {Promise<{swContext: ApiteSW6Utility.SWContext}>}
+ * @throws {ContextDeSyncError|UnauthorizedError}
  */
 module.exports = async (context) => {
   if (!context.meta.userId) {

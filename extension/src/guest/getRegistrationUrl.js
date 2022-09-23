@@ -7,8 +7,8 @@ const {
 const { connectApiManager: { getLoginToken } } = require('@apite/shopware6-utility')
 
 /**
- * @param {ApiteSW6Helper.PipelineContext} context
- * @return Promise<SW6User.UrlResponse>
+ * @param {ApiteSW6Utility.PipelineContext} context
+ * @return Promise<ApiteSW6Utility.UrlResponse>
  */
 module.exports = async (context) => {
   const api = await createApiConfig(context)
@@ -19,7 +19,7 @@ module.exports = async (context) => {
   url.searchParams.append('redirectTo', registrationUrl)
 
   return {
-    url,
+    url: url.toString(),
     expires: new Date(expiration * 1000).toISOString()
   }
 }

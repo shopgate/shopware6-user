@@ -7,7 +7,7 @@ const { contextManager: { getContextToken: getTokenFromStorage } } = require('@a
  * extensions can subscribe to this pipeline to
  * sync their tokens
  *
- * @param {ApiteSW6Helper.PipelineContext} context
- * @returns {Promise<{contextToken: string}>}
+ * @param {ApiteSW6Utility.PipelineContext} context
+ * @returns {Promise<ApiteSW6Utility.ContextToken>}
  */
 module.exports = async (context) => ({ contextToken: await getTokenFromStorage(context) })

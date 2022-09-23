@@ -11,7 +11,7 @@ const nanoid = require('nanoid/async')
 /**
  * Every SW6 API call saves the token to storage afterwards
  *
- * @param {ApiteSW6Helper.PipelineContext} context
+ * @param {ApiteSW6Utility.PipelineContext} context
  * @returns {Promise<void>}
  */
 module.exports = async (context) => {

@@ -5,7 +5,7 @@ const { logout } = require('@shopware-pwa/shopware-6-client')
 const { decorateError } = require('../services/logDecorator')
 
 /**
- * @param {ApiteSW6Helper.PipelineContext} context
+ * @param {ApiteSW6Utility.PipelineContext} context
  * @returns {Promise<void>}
  */
 module.exports = async function (context) {

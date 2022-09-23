@@ -1,10 +1,9 @@
 'use strict'
 
 /**
- * @param {SW6User.PipelineContext} context
- * @param {Object} input
- * @param {SW6User.SWContext} swContext
- * @returns {Promise<SW6User.getUserResponse>}
+ * @param {ApiteSW6Utility.PipelineContext} context
+ * @param {ApiteSW6Utility.SWContext} swContext
+ * @returns {Promise<ApiteSW6User.getResponse>}
  */
 module.exports = async (context, { swContext }) => {
   return {

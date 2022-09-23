@@ -11,13 +11,13 @@ const { login, getSessionContext, update } = require('@shopware-pwa/shopware-6-c
  * We do not want to save any tokens here as we will be saving
  * to the "guest" session here
  *
- * @param {ApiteSW6Helper.PipelineContext} context
- * @param {SW6User.UserLoginInput} input
+ * @param {ApiteSW6Utility.PipelineContext} context
+ * @param {ApiteSW6User.LoginInput} input
  * @returns {Promise<{userId: string, contextToken: string}>}
  */
 module.exports = async function (context, input) {
   if (context.meta.userId) {
-    context.log.warn('User is already logged in')
+    context.log.debug('User is already logged in')
     return {
       userId: context.meta.userId,
       contextToken: await getContextToken(context)
@@ -47,10 +47,10 @@ module.exports = async function (context, input) {
 }
 
 /**
- * @param {SW6User.UserLoginInput} input
- * @param {ApiteSW6Helper.PipelineContext} context
- * @param {ApiteSW6Helper.SWApiInstance} config
- * @returns Promise<SW6User.SWContextTokenResponse>
+ * @param {ApiteSW6User.LoginInput} input
+ * @param {ApiteSW6Utility.PipelineContext} context
+ * @param {ApiteSW6Utility.SWApiInstance} config
+ * @returns Promise<ApiteSW6User.SWContextTokenResponse>
  * @throws {Error}
  */
 const apiLogin = async ({ parameters }, context, config) =>
