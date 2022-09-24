@@ -1,5 +1,3 @@
-image: curlimages/curl:latest
-
 stages:
   - upload
   - deploy
@@ -17,6 +15,8 @@ register package:
     - URL=${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/${PACKAGE_NAME}/${VERSION}/$TAR_FILE
   script:
     - tar -zcvf ${TAR_FILE} ./*
+    - mkdir extensions
+    - mv ${TAR_FILE} extensions/${TAR_FILE}
     - >
       response=$(curl -s -w "\n%{http_code}" --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file ${TAR_FILE} ${URL})
     - code=$(echo "$response" | tail -n 1)
@@ -32,7 +32,7 @@ register package:
     name: ${TAR_FILE}
     expire_in: never
     paths:
-      - ${TAR_FILE}
+      - extensions/${TAR_FILE}
 
 publish to shopgate:
   image: node:14.15.4-slim
@@ -44,14 +44,13 @@ publish to shopgate:
     GIT_STRATEGY: none
   needs:
     - register package
-  before_script:
-    - ARTIFACT=$(find . -type f -name "*.tar.gz" -print -quit)
   script:
-    - npm install -g @shopgate/platform-sdk
-    - sgconnect login --username ${SG_USER} --password ${SG_PASS}
-    - sgconnect init
-    - mkdir -p extensions/temp
-    - tar -xvf ${ARTIFACT} -C extensions/temp
-#    - curl -sS https://webinstall.dev/jq | bash
-#    - PACKAGE_NAME=$(cat extensions/temp/extension-config.json | jq -r '.id')
+    - npm install -g @shopgate/platform-sdk > /dev/null 2>&1
+    - sgconnect login --username "${SG_USER}" --password "${SG_PASS}"
+    - sgconnect init --appId "${APP_ID}" --force
+    - cd extensions
+    - ARTIFACT=$(find . -type f -name "*.tar.gz" -print -quit)
+    - mkdir temp
+    - tar -xvf ${ARTIFACT} -C ./temp/
+    - npm install temp/extension
     - sgconnect extension upload temp --force
