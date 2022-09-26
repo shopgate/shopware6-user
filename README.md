@@ -1,7 +1,15 @@
 ## Shopgate Connect Shopware 6 User Extension by Apite
 
-#### Development
+### Development
 
+#### Setup
+
+```shell
+cd extension && npm i && cd ..
+cd frontend && npm i && cd ..
+```
+
+#### Configurations
 You can set up the ENV variables when running `sgconnect` or use a local `.env` file.
 
 ##### For inline, the command will look like this:
