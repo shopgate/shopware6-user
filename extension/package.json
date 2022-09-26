@@ -4,13 +4,16 @@
   "description": "Shopgate Connect Shopware 6 User extension created by Apite",
   "license": "Apache-2.0",
   "type": "commonjs",
+  "repository": {
+    "url": "https://gitlab.com/apite/shopgate/connect-engage/ext-shopware6-user"
+  },
   "scripts": {
     "develop": "node -r dotenv/config $(which sgconnect) backend start --inspect",
     "backend": "node -r dotenv/config $(which sgconnect) backend start",
     "frontend": "sgconnect frontend start"
   },
   "dependencies": {
-    "@apite/shopware6-utility": "file:../../shopware6-utility",
+    "@apite/shopware6-utility": "0.1.0",
     "@shopware-pwa/shopware-6-client": "^1.5.3",
     "nanoid": "2.1.11"
   },
@@ -20,11 +23,9 @@
     "@types/bunyan": "^1.8.8",
     "dotenv": "^16.0.0",
     "eslint": "^8.16.0",
-    "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.0.0",
-    "eslint-plugin-standard": "^5.0.0",
     "nyc": "15.1.0",
     "standard": "^17.0.0"
   }

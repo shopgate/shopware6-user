@@ -9,7 +9,6 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - fixed issue with guest tokens mixing with logged in customer tokens
 - removed service classes (moved to separate module)
 - removed locales (moved to separate module)
-- removed tests (moved to separate module)
 
 ## 0.1.0-beta.1
 

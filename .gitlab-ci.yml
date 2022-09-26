@@ -15,19 +15,20 @@ register package:
     - URL=${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/${PACKAGE_NAME}/${VERSION}/$TAR_FILE
   script:
     - tar -zcvf ${TAR_FILE} ./*
-    - mkdir extensions
-    - mv ${TAR_FILE} extensions/${TAR_FILE}
     - >
       response=$(curl -s -w "\n%{http_code}" --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file ${TAR_FILE} ${URL})
     - code=$(echo "$response" | tail -n 1)
     - body=$(echo "$response" | head -n 1)
+    - mkdir extensions
+    - mv ${TAR_FILE} extensions/${TAR_FILE}
     # Output state information
     - if [ $code -eq 201 ]; then
       echo "Package created - Code $code - $body";
       else
       echo "Could not create package - Code $code - $body";
       exit 1;
-      fi
+      fi;
+
   artifacts:
     name: ${TAR_FILE}
     expire_in: never
@@ -52,5 +53,6 @@ publish to shopgate:
     - ARTIFACT=$(find . -type f -name "*.tar.gz" -print -quit)
     - mkdir temp
     - tar -xvf ${ARTIFACT} -C ./temp/
-    - npm install temp/extension
+    - cd temp/extension
+    - npm install
     - sgconnect extension upload temp --force
