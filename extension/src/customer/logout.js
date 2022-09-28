@@ -1,24 +1,19 @@
 'use strict'
 
-const { logout, getSessionContext } = require('@shopware-pwa/shopware-6-client')
-const { throwOnApiError } = require('../services/errorManager')
+const { apiManager: { createApiConfig } } = require('@apite/shopware6-utility')
+const { logout } = require('@shopware-pwa/shopware-6-client')
 const { decorateError } = require('../services/logDecorator')
 
 /**
- * @param {SW6User.PipelineContext} context
- * @returns {Promise<{contextToken: string}>}
- * @throws {Error}
+ * @param {ApiteSW6Utility.PipelineContext} context
+ * @returns {Promise<void>}
  */
 module.exports = async function (context) {
   /**
    * We do not mind if the customer is logged out already,
-   * we want to continue with App logout
+   * we want to continue with App logout. We also do not
+   * want to save the token new guest to the user storage
    */
-  await logout().catch(error => context.log.warn(decorateError(error)))
-
-  const contextToken = await getSessionContext()
-    .then(response => response.token)
-    .catch(error => throwOnApiError(error, context))
-
-  return { contextToken }
+  const apiConfig = await createApiConfig(context, {}, false)
+  await logout(apiConfig).catch(error => context.log.warn(decorateError(error)))
 }

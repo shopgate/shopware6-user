@@ -1,15 +1,14 @@
 'use strict'
 
-const { saveContextToken } = require('../services/contextManager')
-const { UnknownError } = require('../services/errorList')
+const {
+  contextManager: { saveContextToken },
+  errorList: { UnknownError }
+} = require('@apite/shopware6-utility')
 const { decorateMessage } = require('../services/logDecorator')
 
 /**
- * @param {SW6User.PipelineContext} context
- * @param {Object} input
- * @param {boolean} input.authSuccess
- * @param {string} input.authType
- * @param {string} input.contextToken
+ * @param {ApiteSW6Utility.PipelineContext} context
+ * @param {ApiteSW6User.SGAuthSuccessInput} input
  * @returns {Promise<void>}
  */
 module.exports = async function (context, input) {

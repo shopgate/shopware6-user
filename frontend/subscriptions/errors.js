@@ -3,7 +3,7 @@ import { logout } from '@shopgate/engage/user';
 
 export default (subscribe) => {
   const errorDeSync$ = pipelineError$.filter((
-    ({ action: { error: { code } } }) => code === 'EUSERDESYNC'
+    ({ action: { error: { code } } }) => code === 'EDESYNC'
   ));
   /**
    * If the App token is de-synced the customer has to log back in.

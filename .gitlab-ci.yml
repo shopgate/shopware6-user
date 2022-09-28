@@ -1,0 +1,53 @@
+stages:
+  - upload
+  - deploy
+
+register package:
+  image: dwdraju/alpine-curl-jq
+  services: [ ]
+  stage: upload
+  only:
+    - tags
+  before_script:
+    - VERSION=$([[ -z "$CI_COMMIT_TAG" ]] && echo "$CI_COMMIT_REF_NAME" || echo "$CI_COMMIT_TAG")
+    - PACKAGE_NAME=$(cat extension-config.json | jq -r '.id' | sed -e 's/\//-/g' | sed 's/@//g')
+    - TAR_FILE=${PACKAGE_NAME}.${VERSION}.tar.gz
+    - URL=${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/${PACKAGE_NAME}/${VERSION}/$TAR_FILE
+  script:
+    - tar -zcvf ${TAR_FILE} ./*
+    - >
+      response=$(curl -s -w "\n%{http_code}" --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file ${TAR_FILE} ${URL})
+    - code=$(echo "$response" | tail -n 1)
+    - body=$(echo "$response" | head -n 1)
+    - mkdir extensions
+    - mv ${TAR_FILE} extensions/${TAR_FILE}
+    # Output state information
+    - if [ $code -eq 201 ]; then
+      echo "Package created - Code $code - $body";
+      else
+      echo "Could not create package - Code $code - $body";
+      exit 1;
+      fi;
+
+  artifacts:
+    name: ${TAR_FILE}
+    expire_in: never
+    paths:
+      - extensions/${TAR_FILE}
+
+publish to shopgate:
+  image: registry.gitlab.com/apite/shopgate/connect-engage/images/webc:latest
+  services: [ ]
+  stage: deploy
+  only:
+    - tags
+  variables:
+    GIT_STRATEGY: none
+  needs:
+    - register package
+  script:
+    - cd extensions
+    - ARTIFACT=$(find . -type f -name "*.tar.gz" -print -quit)
+    - mkdir temp
+    - tar -xvf ${ARTIFACT} -C ./temp/
+    - sgconnect extension upload temp --force

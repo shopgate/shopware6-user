@@ -1,20 +1,25 @@
-const { config } = require('@shopware-pwa/shopware-6-client')
-const { getLoginToken } = require('../services/connectApiManager')
-const { throwOnApiError } = require('../services/errorManager')
+'use strict'
+
+const {
+  apiManager: { createApiConfig },
+  errorManager: { throwOnApiError }
+} = require('@apite/shopware6-utility')
+const { connectApiManager: { getLoginToken } } = require('@apite/shopware6-utility')
 
 /**
- * @param {SW6User.PipelineContext} context
- * @return Promise<SW6User.UrlResponse>
+ * @param {ApiteSW6Utility.PipelineContext} context
+ * @return Promise<ApiteSW6Utility.UrlResponse>
  */
 module.exports = async (context) => {
-  const { token, expiration } = await getLoginToken().catch(e => throwOnApiError(e, context))
-  const url = new URL('sgconnect/login', config.endpoint)
+  const api = await createApiConfig(context)
+  const { token, expiration } = await getLoginToken(api).catch(e => throwOnApiError(e, context))
+  const url = new URL('sgconnect/login', api.config.endpoint)
   url.searchParams.append('token', token)
-  const registrationUrl = new URL(context.config.registrationPath, config.endpoint).href
+  const registrationUrl = new URL(context.config.registrationPath, api.config.endpoint).href
   url.searchParams.append('redirectTo', registrationUrl)
 
   return {
-    url,
+    url: url.toString(),
     expires: new Date(expiration * 1000).toISOString()
   }
 }

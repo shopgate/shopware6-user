@@ -1,34 +1,42 @@
 'use strict'
 
+const {
+  apiManager: { createApiConfig },
+  contextManager: { getContextToken },
+  errorManager: { throwOnApiError }
+} = require('@apite/shopware6-utility')
 const { login, getSessionContext, update } = require('@shopware-pwa/shopware-6-client')
-const { getContextToken } = require('../services/contextManager')
-const { throwOnApiError } = require('../services/errorManager')
 
 /**
- * @param {SW6User.PipelineContext} context
- * @param {SW6User.UserLoginInput} input
+ * We do not want to save any tokens here as we will be saving
+ * to the "guest" session here
+ *
+ * @param {ApiteSW6Utility.PipelineContext} context
+ * @param {ApiteSW6User.LoginInput} input
  * @returns {Promise<{userId: string, contextToken: string}>}
  */
 module.exports = async function (context, input) {
   if (context.meta.userId) {
-    context.log.warn('User is already logged in')
+    context.log.debug('User is already logged in')
     return {
       userId: context.meta.userId,
       contextToken: await getContextToken(context)
     }
   }
 
+  const apiConfig = await createApiConfig(context, {}, false)
   let contextToken
   if (input.strategy === 'auth_code' && input.parameters.code) {
     update({ contextToken: input.parameters.code })
     contextToken = input.parameters.code
+    apiConfig.update({ contextToken })
     context.log.debug('updating context from registration: ' + contextToken)
   } else {
-    contextToken = await apiLogin(input, context)
+    contextToken = await apiLogin(input, context, apiConfig)
     context.log.debug('updating context from login: ' + contextToken)
   }
 
-  const userId = await getSessionContext()
+  const userId = await getSessionContext(apiConfig)
     .then(swContext => swContext.customer.id)
     .catch(e => throwOnApiError(e, context))
 
@@ -39,13 +47,13 @@ module.exports = async function (context, input) {
 }
 
 /**
- * @param {SW6User.UserLoginInput} input
- * @param {SW6User.PipelineContext} context
- * @returns Promise<SW6User.SWContextTokenResponse>
+ * @param {ApiteSW6User.LoginInput} input
+ * @param {ApiteSW6Utility.PipelineContext} context
+ * @param {ApiteSW6Utility.SWApiInstance} config
+ * @returns Promise<ApiteSW6User.SWContextTokenResponse>
  * @throws {Error}
  */
-const apiLogin = async function (input, context) {
-  return login({ username: input.parameters.login, password: input.parameters.password })
+const apiLogin = async ({ parameters }, context, config) =>
+  login({ username: parameters.login, password: parameters.password }, config)
     .then(response => response.contextToken)
     .catch(err => throwOnApiError(err, context))
-}

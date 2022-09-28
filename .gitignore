@@ -58,3 +58,5 @@ typings/
 .env
 
 extension/config.json
+pnpm-lock.yaml
+postman-report.html
