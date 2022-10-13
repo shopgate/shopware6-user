@@ -48,14 +48,14 @@
     "registrationPath": {
       "type": "admin",
       "destination": "backend",
-      "default": "/sgconnect/register",
+      "default": "/sgwebcheckout/register",
       "params": {
         "type": "text",
         "label": "Registration URL path",
         "description": "Code will combine the Store URL + the provided path here",
         "required": false,
         "options": {
-          "placeholder": "/account/register?redirectTo=frontend.sgconnect.registered"
+          "placeholder": "/account/register?redirectTo=frontend.sgwebcheckout.registered"
         }
       }
     }
