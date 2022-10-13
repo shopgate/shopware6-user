@@ -2,21 +2,21 @@
 
 const {
   apiManager: { createApiConfig },
+  configManager: { getEndpoint },
+  connectApiManager: { getLoginToken, getLoginUrl },
   errorManager: { throwOnApiError }
 } = require('@apite/shopware6-utility')
-const { connectApiManager: { getLoginToken } } = require('@apite/shopware6-utility')
 
 /**
  * @param {ApiteSW6Utility.PipelineContext} context
  * @return Promise<ApiteSW6Utility.UrlResponse>
  */
 module.exports = async (context) => {
+  const endpoint = getEndpoint(context)
   const api = await createApiConfig(context)
   const { token, expiration } = await getLoginToken(api).catch(e => throwOnApiError(e, context))
-  const url = new URL('sgconnect/login', api.config.endpoint)
-  url.searchParams.append('token', token)
-  const registrationUrl = new URL(context.config.registrationPath, api.config.endpoint).href
-  url.searchParams.append('redirectTo', registrationUrl)
+  const redirectTo = new URL(context.config.registrationPath, endpoint).href
+  const url = getLoginUrl(endpoint, { token, redirectTo })
 
   return {
     url: url.toString(),
