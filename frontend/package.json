@@ -1,8 +1,8 @@
 {
   "name": "@apite/shopware6-user",
-  "version": "1.1.0",
   "description": "Shopware 6 user extension frontend",
   "scripts": {
+    "init": "npm i && cd ../extension && npm i && cd ..",
     "lint": "./node_modules/.bin/eslint --ignore-path ../.gitignore --ext .js --ext .jsx ."
   },
   "license": "Apache-2.0",
