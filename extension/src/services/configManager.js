@@ -1,3 +1,5 @@
+'use strict'
+
 /**
  * @param {ApiteSW6Utility.PipelineContext} context
  * @returns {?string}
