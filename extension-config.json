@@ -1,5 +1,5 @@
 {
-  "version": "1.1.0",
+  "version": "1.1.1-beta.1",
   "id": "@apite/shopware6-user",
   "trusted": true,
   "configuration": {
@@ -53,9 +53,9 @@
         "type": "text",
         "label": "Registration URL path",
         "description": "Code will combine the Store URL + the provided path here",
-        "required": false,
+        "required": true,
         "options": {
-          "placeholder": "/account/register?redirectTo=frontend.sgwebcheckout.registered"
+          "placeholder": "/sgwebcheckout/register"
         }
       }
     }
