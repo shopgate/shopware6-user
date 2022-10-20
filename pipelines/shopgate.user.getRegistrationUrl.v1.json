@@ -6,19 +6,32 @@
     "input": [
     ],
     "output": [
-      {"key": "url", "id": "1010"},
-      {"key": "expires", "id": "1020", "optional": true}
+      {"key": "url", "id": "1030"},
+      {"key": "expires", "id": "1040", "optional": true}
     ],
     "steps": [
       {
         "type": "extension",
         "id": "@apite/shopware6-user",
-        "path": "@apite/shopware6-user/src/guest/getRegistrationUrl.js",
+        "path": "@apite/shopware6-user/src/guest/getLoginToken.js",
         "input": [
         ],
         "output": [
-          {"key": "url", "id": "1010"},
-          {"key": "expires", "id": "1020", "optional": true}
+          {"key": "token", "id": "1010"},
+          {"key": "expiration", "id": "1020"}
+        ]
+      },
+      {
+        "type": "extension",
+        "id": "@apite/shopware6-user",
+        "path": "@apite/shopware6-user/src/guest/getRegistrationUrl.js",
+        "input": [
+          {"key": "token", "id": "1010"},
+          {"key": "expiration", "id": "1020"}
+        ],
+        "output": [
+          {"key": "url", "id": "1030"},
+          {"key": "expires", "id": "1040"}
         ]
       },
       {
