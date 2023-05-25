@@ -46,7 +46,7 @@ export default (subscribe) => {
     .debounceTime(1000);
 
   /**
-   * Pop a login page after web registration / and redirect to checkout
+   * Pop a login page after web registration / and redirect to check out
    */
   subscribe(loginAfterRegisterRedirect$, ({ dispatch, getState }) => {
     const { state: { redirect: { location = '' } = {} } } = getCurrentRoute();

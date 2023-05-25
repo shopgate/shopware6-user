@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres
 to [Semantic Versioning](http://semver.org/).
 
+## 1.1.2
+
+- updated utility dependency to suppress error from getRegistrationUrl/getCart due to race condition
+
 ## 1.1.1
 
 - added logging when getting the registration URL
