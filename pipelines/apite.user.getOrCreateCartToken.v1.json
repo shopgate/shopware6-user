@@ -1,0 +1,51 @@
+{
+  "version": "1",
+  "pipeline": {
+    "id": "apite.user.getOrCreateCartToken.v1",
+    "public": true,
+    "input": [],
+    "output": [
+      {"key": "contextToken", "id": "105"}
+    ],
+    "steps": [
+      {
+        "type": "pipeline",
+        "trusted": false,
+        "id": "apite.cart.getContextToken.v1",
+        "input": [],
+        "output": [
+          {"key": "contextToken", "id": "105", "optional": true}
+        ]
+      },
+      {
+        "type": "conditional",
+        "input": [
+          {"key": "contextToken", "id": "105", "optional": true}
+        ],
+        "expression": {
+          "notok": [
+            {"name": "contextToken"}
+          ]
+        },
+        "then": {
+          "type": "pipeline",
+          "trusted": false,
+          "id": "apite.cart.newCart.v1",
+          "input": [],
+          "output": [
+            {"key": "contextToken", "id": "105"}
+          ]
+        }
+      },
+      {
+        "type": "pipeline",
+        "trusted": true,
+        "id": "apite.user.setContextToken.v1",
+        "input": [
+          {"key": "contextToken", "id": "105"}
+        ],
+        "output": []
+      }
+    ]
+  }
+}

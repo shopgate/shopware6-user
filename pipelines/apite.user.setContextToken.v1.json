@@ -4,10 +4,7 @@
     "id": "apite.user.setContextToken.v1",
     "public": true,
     "input": [
-      {
-        "key": "contextToken",
-        "id": "1000"
-      }
+      {"key": "contextToken", "id": "1000"}
     ],
     "output": [],
     "steps": [

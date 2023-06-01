@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres
 to [Semantic Versioning](http://semver.org/).
 
+## 1.2.0
+
+- added token sync via pipelines
+- changed token sync via hooks to avoid race conditions
+
 ## 1.1.2
 
 - updated utility dependency to suppress error from getRegistrationUrl/getCart due to race condition
