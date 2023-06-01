@@ -11,10 +11,20 @@
     ],
     "steps": [
       {
+        "type": "pipeline",
+        "trusted": true,
+        "id": "apite.user.getOrCreateCartToken.v1",
+        "input": [],
+        "output": [
+          {"key": "contextToken", "id": "105"}
+        ]
+      },
+      {
         "type": "extension",
         "id": "@apite/shopware6-user",
         "path": "@apite/shopware6-user/src/guest/getLoginToken.js",
         "input": [
+          {"key": "contextToken", "id": "105"}
         ],
         "output": [
           {"key": "token", "id": "1010"},
@@ -33,24 +43,6 @@
           {"key": "url", "id": "1030"},
           {"key": "expires", "id": "1040"}
         ]
-      },
-      {
-        "id": "@apite/shopware6-user",
-        "path": "@apite/shopware6-user/src/context/getTokenFromStorage.js",
-        "type": "extension",
-        "input": [],
-        "output": [
-          {"key": "contextToken", "id": "105"}
-        ]
-      },
-      {
-        "type": "pipeline",
-        "trusted": true,
-        "id": "apite.user.setContextToken.v1",
-        "input": [
-          {"key": "contextToken", "id": "105"}
-        ],
-        "output": []
       }
     ]
   }

@@ -1,5 +1,5 @@
 {
-  "version": "1.1.2",
+  "version": "1.2.0",
   "id": "@apite/shopware6-user",
   "trusted": true,
   "configuration": {
@@ -61,16 +61,6 @@
     }
   },
   "steps": [
-    {
-      "path": "extension/src/hooks/authSetup.js",
-      "description": "Sets up authentication before every pipeline call",
-      "hooks": [
-        "shopgate.user.logoutUser.v1:after",
-        "shopgate.user.getRegistrationUrl.v1:before"
-      ],
-      "input": [],
-      "output": []
-    },
     {
       "path": "extension/src/hooks/getUserContext.js",
       "description": "Loads the user context to make sure we have a SW logged in context token",
