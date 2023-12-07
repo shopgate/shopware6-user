@@ -4,6 +4,8 @@ stages:
 
 register package:
   image: dwdraju/alpine-curl-jq
+  tags:
+    - build-amd64
   services: [ ]
   stage: upload
   only:
