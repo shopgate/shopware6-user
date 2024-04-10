@@ -50,10 +50,11 @@ module.exports = async function (context, input) {
  * @param {ApiteSW6User.LoginInput} input
  * @param {ApiteSW6Utility.PipelineContext} context
  * @param {ApiteSW6Utility.SWApiInstance} config
- * @returns Promise<ApiteSW6User.SWContextTokenResponse>
+ * @returns Promise<string>
  * @throws {Error}
  */
-const apiLogin = async ({ parameters }, context, config) =>
-  login({ username: parameters.login, password: parameters.password }, config)
-    .then(response => response.contextToken)
+const apiLogin = async function ({ parameters }, context, config) {
+  await login({ username: parameters.login, password: parameters.password }, config)
     .catch(err => throwOnApiError(err, context))
+  return config.config.contextToken
+}
