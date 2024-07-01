@@ -2,4 +2,9 @@ root: true
 extends:
   - standard
 env:
+  es2020: true
   node: true
+globals:
+  AggregateError: readonly
+  FinalizationRegistry: readonly
+  WeakRef: readonly
