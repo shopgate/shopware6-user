@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "",
   "scripts": {
-    "postman-user": "node_modules/.bin/newman run -r cli,htmlextra ./postman/collection.json -e ./postman/environment.json -g ./postman/globals.json --reporter-htmlextra-export postman-report.html --color=on --bail",
+    "local": "node_modules/.bin/newman run -r cli ./postman/collection.json -e ./postman/environment.json -g ./postman/globals.json --color=on --bail",
     "postman-ci": "node_modules/.bin/newman run -r cli,htmlextra,junit ./postman/collection.json -e ./postman/environment.json -g ./postman/globals.json --color=on --insecure --no-insecure-file-read"
   },
   "author": "",
