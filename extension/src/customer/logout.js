@@ -1,7 +1,9 @@
 'use strict'
 
-const { apiManager: { createApiConfig } } = require('@apite/shopware6-utility')
-const { logout } = require('@shopware-pwa/shopware-6-client')
+const {
+  apiManager: { logout },
+  clientManger: { createApiConfig }
+} = require('@apite/shopware6-utility')
 const { decorateError } = require('../services/logDecorator')
 
 /**
@@ -14,6 +16,6 @@ module.exports = async function (context) {
    * we want to continue with App logout. We also do not
    * want to save the token new guest to the user storage
    */
-  const apiConfig = await createApiConfig(context, {}, false)
+  const apiConfig = await createApiConfig(context)
   await logout(apiConfig).catch(error => context.log.warn(decorateError(error)))
 }

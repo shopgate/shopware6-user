@@ -3,23 +3,6 @@
  */
 
 /**
- * @typedef {Object} ApiteSW6User.LoginInput
- * @property {'auth_code'|'basic'} strategy
- * @property {ApiteSW6User.LoginStrategyBasic|ApiteSW6User.LoginStrategyToken} parameters
- */
-
-/**
- * @typedef {Object} ApiteSW6User.LoginStrategyBasic
- * @property {string} login - email
- * @property {string} password
- */
-
-/**
- * @typedef {Object} ApiteSW6User.LoginStrategyToken
- * @property {string} code - shopware context token
- */
-
-/**
  * @typedef {Object} ApiteSW6User.SGAuthSuccessInput
  * @property {boolean} authSuccess
  * @property {string} authType

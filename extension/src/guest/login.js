@@ -1,39 +1,45 @@
 'use strict'
 
 const {
-  apiManager: { createApiConfig },
+  apiManager: { login, getSessionContext },
+  clientManger: { createApiConfig },
   contextManager: { getContextToken },
   errorManager: { throwOnApiError }
 } = require('@apite/shopware6-utility')
-const { login, getSessionContext, update } = require('@shopware-pwa/shopware-6-client')
+const { decorateMessage } = require('../services/logDecorator')
 
 /**
+ * // todo: check if this message needs cleaning
  * We do not want to save any tokens here as we will be saving
  * to the "guest" session here
  *
  * @param {ApiteSW6Utility.PipelineContext} context
- * @param {ApiteSW6User.LoginInput} input
+ * @param {SGConnectAPI.LoginRequest} input
  * @returns {Promise<{userId: string, contextToken: string}>}
  */
-module.exports = async function (context, input) {
+module.exports = async function (context, { strategy, parameters }) {
   if (context.meta.userId) {
-    context.log.debug('User is already logged in')
+    context.log.debug(decorateMessage('User is already logged in'))
     return {
       userId: context.meta.userId,
       contextToken: await getContextToken(context)
     }
   }
 
-  const apiConfig = await createApiConfig(context, {}, false)
+  // todo: test if not saving the token is necessary
+  const apiConfig = await createApiConfig(context)
   let contextToken
-  if (input.strategy === 'auth_code' && input.parameters.code) {
-    update({ contextToken: input.parameters.code })
-    contextToken = input.parameters.code
-    apiConfig.update({ contextToken })
-    context.log.debug('updating context from registration: ' + contextToken)
+  if (strategy === 'auth_code' && parameters.code) {
+    contextToken = parameters.code
+    apiConfig.defaults.headers['sw-context-token'] = contextToken
+    // todo: obfuscate
+    context.log.debug(decorateMessage('updating context from registration: ' + contextToken))
   } else {
-    contextToken = await apiLogin(input, context, apiConfig)
-    context.log.debug('updating context from login: ' + contextToken)
+    contextToken = await login(apiConfig, {
+      username: parameters.login,
+      password: parameters.password
+    }).catch(err => throwOnApiError(err, context))
+    context.log.debug(decorateMessage('updating context token from login: ' + contextToken))
   }
 
   const userId = await getSessionContext(apiConfig)
@@ -44,17 +50,4 @@ module.exports = async function (context, input) {
     userId,
     contextToken
   }
-}
-
-/**
- * @param {ApiteSW6User.LoginInput} input
- * @param {ApiteSW6Utility.PipelineContext} context
- * @param {ApiteSW6Utility.SWApiInstance} config
- * @returns Promise<string>
- * @throws {Error}
- */
-const apiLogin = async function ({ parameters }, context, config) {
-  await login({ username: parameters.login, password: parameters.password }, config)
-    .catch(err => throwOnApiError(err, context))
-  return config.config.contextToken
 }

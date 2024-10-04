@@ -1,10 +1,10 @@
 'use strict'
 
 const {
-  apiManager: { createApiConfig },
+  apiManager: { getSessionContext },
+  clientManger: { createApiConfig },
   errorManager: { throwOnApiError }
 } = require('@apite/shopware6-utility')
-const { getSessionContext } = require('@shopware-pwa/shopware-6-client')
 
 /**
  * @param {ApiteSW6Utility.PipelineContext} context
