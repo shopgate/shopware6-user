@@ -4,6 +4,7 @@ extends:
 env:
   es2020: true
   node: true
+  jest: true
 globals:
   AggregateError: readonly
   FinalizationRegistry: readonly

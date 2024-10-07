@@ -8,7 +8,7 @@ const {
 
 /**
  * @param {ApiteSW6Utility.PipelineContext} context
- * @returns {Promise<ApiteSW6Utility.ContextToken>}
+ * @returns {Promise<SGConnectAPI.ContextTokenParam>}
  * @throws {Error}
  */
 module.exports = async context => {

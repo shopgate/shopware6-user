@@ -1,7 +1,7 @@
 'use strict'
 
 const {
-  apiManager: { createApiConfig },
+  clientManger: { createApiConfig },
   connectApiManager: { getLoginToken },
   errorManager: { throwOnApiError }
 } = require('@apite/shopware6-utility')

@@ -10,7 +10,7 @@ const { getRegistrationPath } = require('../services/configManager')
 /**
  * @param {ApiteSW6Utility.PipelineContext} context
  * @param {SGConnectAPI.LoginTokenResponse} input
- * @return Promise<ApiteSW6Utility.UrlResponse>
+ * @return Promise<SGConnectAPI.UrlResponse>
  */
 module.exports = async (context, { token, expiration }) => {
   const endpoint = getEndpoint(context)

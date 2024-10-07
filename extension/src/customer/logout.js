@@ -16,6 +16,6 @@ module.exports = async function (context) {
    * we want to continue with App logout. We also do not
    * want to save the token new guest to the user storage
    */
-  const apiConfig = await createApiConfig(context)
+  const apiConfig = await createApiConfig(context, false)
   await logout(apiConfig).catch(error => context.log.warn(decorateError(error)))
 }
