@@ -13,8 +13,7 @@
     "test:unit": "jest"
   },
   "dependencies": {
-    "@apite/shopware6-utility": "^1.1.2",
-    "@shopware-pwa/shopware-6-client": "^1.6.1",
+    "@apite/shopware6-utility": "^2.0.0-beta.1",
     "nanoid": "2.1.11"
   },
   "devDependencies": {
