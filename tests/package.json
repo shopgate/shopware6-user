@@ -1,15 +1,19 @@
 {
   "name": "@apite/sw6-user-tests",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "",
   "scripts": {
-    "local": "node_modules/.bin/newman run -r cli ./postman/collection.json -e ./postman/environment.json -g ./postman/globals.json --color=on --bail",
-    "postman-ci": "node_modules/.bin/newman run -r cli,htmlextra,junit ./postman/collection.json -e ./postman/environment.json -g ./postman/globals.json --color=on --insecure --no-insecure-file-read"
+    "postman-user": "node_modules/.bin/newman run -r cli ./postman/collection.json -e ./postman/environment.json -g ./postman/globals.json --color=on --bail",
+    "postman-ci": "node_modules/.bin/newman run -r cli,htmlextra,junitfull ./postman/collection.json -e ./postman/environment.json -g ./postman/globals.json --color=on --insecure --no-insecure-file-read"
   },
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": "<= 10.0.0"
+  },
   "dependencies": {
-    "newman": "latest",
-    "newman-reporter-htmlextra": "latest"
+    "newman": "5.3.2",
+    "newman-reporter-htmlextra": "1.22.11",
+    "newman-reporter-junitfull": "1.1.1"
   }
 }
