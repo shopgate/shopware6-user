@@ -14,6 +14,9 @@ variables:
   COMPOSER_HOME: $PROJECT_ROOT/.cache/composer
   GIT_CLONE_PATH: $CI_BUILDS_DIR/$CI_CONCURRENT_ID/$PLUGIN_NAME
   DOCKWARE_CI: '1'
+  SW_API_ACCESS_KEY: 'SWSCS3JDYJVWYNLUNW1YDENIAG'
+  SW_ACCESS_KEY: $SW_API_ACCESS_KEY
+  SW_LANG_ID: '2fbb5fe2e29a4d70aa5854ce7ce3e20b'
   APP_ENV: 'dev'
   APP_DEBUG: '0'
   XDEBUG_ENABLED: '0'
@@ -38,6 +41,7 @@ test:
   before_script:
     - export LANG="en_US.UTF-8"
     - export APP_URL="http://$HOSTNAME"
+    - export SW_ENDPOINT=$APP_URL
     - cd $PROJECT_ROOT
     - '[ -d $CI_PROJECT_DIR/.cache ] && mv $CI_PROJECT_DIR/.cache $PROJECT_ROOT/'
     - make -C $PROJECT_ROOT/../ xdebug-off
