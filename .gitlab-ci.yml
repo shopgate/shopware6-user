@@ -59,7 +59,7 @@ test:
       fi
     - mkdir -p $PWA_DIR
     - cd $PWA_DIR
-    - nvm install 12.22.12 --default
+    - nvm install 12.22.10 --default
     - npm set unsafe-perm true --silent
     - npm install --silent -g @shopgate/platform-sdk
     - sgconnect login --username "${SG_USER}" --password "${SG_PASS}"
@@ -91,7 +91,7 @@ test:
     - tar -czvf $CI_PROJECT_DIR/var_folder.tar.gz var/log || true
   artifacts:
     when: on_failure
-    expire_in: 1 days # todo: change
+    expire_in: 3 days
     reports:
       junit: newman.junit.xml
     paths:
