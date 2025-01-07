@@ -7,6 +7,7 @@ to [Semantic Versioning](http://semver.org/).
 
 ## 2.0.0
 
+- changed API calls to utilize utility's axios instance
 - updated utility to version 2.0.0
 
 ## 1.3.1
