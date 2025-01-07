@@ -9,14 +9,11 @@
   "scripts": {
     "init": "npm i && cd ../frontend && npm i && cd ..",
     "utility:develop": "npm install --save ../../shopware6-utility",
-    "backend": "node -r dotenv/config $(which sgconnect) backend start",
-    "backend:dev": "node -r dotenv/config $(which sgconnect) backend start --inspect",
     "frontend": "sgconnect frontend start",
     "test:unit": "jest"
   },
   "dependencies": {
-    "@apite/shopware6-utility": "^1.1.2",
-    "@shopware-pwa/shopware-6-client": "^1.6.1",
+    "@apite/shopware6-utility": "^2.0.0",
     "nanoid": "2.1.11"
   },
   "devDependencies": {
@@ -24,14 +21,14 @@
     "@types/node": "^17.0.19",
     "@types/bunyan": "^1.8.8",
     "@types/jest": "^29.2.0",
-    "dotenv": "^16.0.0",
     "eslint": "^6.8.0",
     "eslint-config-standard": "^14.0.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-n": "^15.5.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^6.1.1",
-    "jest": "^29.2.1",
+    "jest": "^25.5.4",
+    "jest-junit": "^14.0.1",
     "nyc": "15.1.0",
     "standard": "^10.0.3"
   }

@@ -1,7 +1,7 @@
 'use strict'
 
 const {
-  contextManager: { saveContextToken },
+  contextManager: { removeContextToken },
   errorList: { UnknownError }
 } = require('@apite/shopware6-utility')
 const { decorateMessage } = require('../services/logDecorator')
@@ -14,8 +14,7 @@ const { decorateMessage } = require('../services/logDecorator')
 module.exports = async function (context, input) {
   if (input.authType === 'Login' && input.authSuccess !== true) {
     context.log.error(decorateMessage(input.authType + ': Auth step finished unsuccessfully.'))
+    await removeContextToken(context)
     throw new UnknownError()
   }
-
-  await saveContextToken(input.contextToken, context)
 }

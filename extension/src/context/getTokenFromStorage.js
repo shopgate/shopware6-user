@@ -4,6 +4,6 @@ const { contextManager: { getContextToken: getTokenFromStorage } } = require('@a
 
 /**
  * @param {ApiteSW6Utility.PipelineContext} context
- * @returns {Promise<ApiteSW6Utility.ContextToken>}
+ * @returns {Promise<SGConnectAPI.ContextTokenParam>}
  */
 module.exports = async (context) => ({ contextToken: await getTokenFromStorage(context) })

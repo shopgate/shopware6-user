@@ -1,18 +1,18 @@
 'use strict'
 
 const {
-  apiManager: { createApiConfig },
+  apiManager: { getSessionContext },
+  clientManger: { createApiConfig },
   errorManager: { throwOnApiError },
   errorList: { ContextDeSyncError, UnauthorizedError }
 } = require('@apite/shopware6-utility')
-const { getSessionContext } = require('@shopware-pwa/shopware-6-client')
 const { decorateMessage } = require('../services/logDecorator')
 
 /**
  * This hook needs to be applied to all customer pipelines
  *
  * @param {ApiteSW6Utility.PipelineContext} context
- * @returns {Promise<{swContext: ApiteSW6Utility.SWContext}>}
+ * @returns {Promise<{swContext: SessionContext }>}
  * @throws {ContextDeSyncError|UnauthorizedError}
  */
 module.exports = async (context) => {

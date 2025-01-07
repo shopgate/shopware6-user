@@ -2,7 +2,7 @@
 
 /**
  * @param {ApiteSW6Utility.PipelineContext} context
- * @param {ApiteSW6Utility.SWContext} swContext
+ * @param {SessionContext} swContext
  * @returns {Promise<ApiteSW6User.getResponse>}
  */
 module.exports = async (context, { swContext }) => {

@@ -1,5 +1,5 @@
 {
-  "version": "1.3.1",
+  "version": "2.0.0",
   "id": "@apite/shopware6-user",
   "trusted": true,
   "configuration": {
@@ -34,7 +34,7 @@
     "languageId": {
       "type": "admin",
       "destination": "backend",
-      "default": null,
+      "default": "2fbb5fe2e29a4d70aa5854ce7ce3e20b",
       "params": {
         "type": "text",
         "label": "Language ID",
