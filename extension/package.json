@@ -31,5 +31,10 @@
     "jest-junit": "^14.0.1",
     "nyc": "15.1.0",
     "standard": "^10.0.3"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^@apite/shopware6-utility$": "<rootDir>/src/__mocks__/@apite/shopware6-utility.js"
+    }
   }
 }
