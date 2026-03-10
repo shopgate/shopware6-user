@@ -4,7 +4,8 @@ const {
   apiManager: { login, getSessionContext },
   clientManger: { createApiConfig },
   contextManager: { getContextToken },
-  errorManager: { throwOnApiError, throwOnMessage }
+  errorManager: { throwOnApiError, throwOnMessage },
+  errorList: { InvalidCredentialsError }
 } = require('@apite/shopware6-utility')
 const { decorateMessage, obfuscateString } = require('../services/logDecorator')
 
@@ -35,9 +36,10 @@ module.exports = async function (context, { strategy, parameters }) {
     contextToken = await login(client, {
       username: parameters.login,
       password: parameters.password
-    }).catch(err =>
-      err.messages ? throwOnMessage(err.messages, context) : throwOnApiError(err, context)
-    )
+    }).catch(err => {
+      if (err.statusCode === 401) throw new InvalidCredentialsError()
+      return err.messages ? throwOnMessage(err.messages, context) : throwOnApiError(err, context)
+    })
     context.log.debug(decorateMessage('Received token from login/pass: ' + obfuscateString(contextToken)))
   }
 
