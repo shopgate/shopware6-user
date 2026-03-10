@@ -99,6 +99,7 @@ test:
       break;
       fi;
       done < <(tail -f $CI_PROJECT_DIR/backend_output.log);
+    - cat $CI_PROJECT_DIR/backend_output.log
   script:
     - cd $CI_PROJECT_DIR/tests
     - npm install
