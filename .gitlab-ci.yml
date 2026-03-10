@@ -81,15 +81,15 @@ test:
     - cd $PWA_DIR
     - nvm install 24 && nvm use 24
     - npm config set legacy-peer-deps true
-    - npm install --silent -g @shopgate/platform-sdk@2.0.0
+    - npm install -g --silent @shopgate/platform-sdk@2.0.0
     - sgconnect login --username "${SG_USER}" --password "${SG_PASS}"
     - sgconnect init --appId "${APP_ID}" --force
     - cd ${PWA_DIR}/extensions
     - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/apite/shopgate/connect-engage/shopware6/ext-shopware6-cart.git
     - mkdir -p ${PWA_DIR}/extensions/$CI_PROJECT_NAME
     - cp -r $CI_PROJECT_DIR/* ${PWA_DIR}/extensions/$CI_PROJECT_NAME
-    - npm run init --prefix ${PWA_DIR}/extensions/ext-shopware6-cart/extension
-    - npm run init --prefix ${PWA_DIR}/extensions/$CI_PROJECT_NAME/extension
+    - npm run init --silent --prefix ${PWA_DIR}/extensions/ext-shopware6-cart/extension
+    - npm run init --silent --prefix ${PWA_DIR}/extensions/$CI_PROJECT_NAME/extension
     - sgconnect extension attach ext-shopware6-cart $CI_PROJECT_NAME
     - touch $CI_PROJECT_DIR/backend_output.log
     - sgconnect backend start >> $CI_PROJECT_DIR/backend_output.log 2>&1 &
@@ -107,7 +107,6 @@ test:
       --reporter-htmlextra-export="$CI_PROJECT_DIR/postman-report.html"
       --reporter-junitfull-export="$CI_PROJECT_DIR/newman.junit.xml";
   after_script:
-    - cat $CI_PROJECT_DIR/backend_output.log || true
     - cd $PROJECT_ROOT
     - tar -czvf $CI_PROJECT_DIR/var_folder.tar.gz var/log || true
   artifacts:
