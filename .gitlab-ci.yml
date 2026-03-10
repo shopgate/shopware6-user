@@ -34,11 +34,8 @@ unit-test:
   rules:
     - if: '$CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "merge_request_event"'
   script:
-    - mkdir -p $CI_PROJECT_DIR/../shopware6-utility
-    - echo '{"name":"@apite/shopware6-utility","version":"0.0.0","main":"index.js"}' > $CI_PROJECT_DIR/../shopware6-utility/package.json
-    - echo 'module.exports = {}' > $CI_PROJECT_DIR/../shopware6-utility/index.js
     - cd extension
-    - npm ci --ignore-scripts
+    - npm ci --legacy-peer-deps
     - npm run test:unit -- --ci --reporters=default --reporters=jest-junit
   variables:
     JEST_JUNIT_OUTPUT_NAME: junit.xml
