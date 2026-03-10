@@ -80,7 +80,6 @@ test:
     - mkdir -p $PWA_DIR
     - cd $PWA_DIR
     - nvm install 24 && nvm use 24
-    - npm set unsafe-perm true --silent
     - npm install --silent -g @shopgate/platform-sdk
     - sgconnect login --username "${SG_USER}" --password "${SG_PASS}"
     - sgconnect init --appId "${APP_ID}" --force
