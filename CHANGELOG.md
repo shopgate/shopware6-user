@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres
 to [Semantic Versioning](http://semver.org/).
 
+## 2.0.1
+
+- fixed wrong login credentials returning a generic error instead of `EBADCREDENTIALS`
+
 ## 2.0.0
 
 - changed API calls to utilize utility's axios instance
