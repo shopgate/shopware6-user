@@ -26,7 +26,27 @@ variables:
   PLUGIN_NAME: 'SgateWebcheckoutSW6'
   PLUGIN_COMPOSER: 'shopgate/webcheckout-shopware6'
 
+unit-test:
+  image: node:24-alpine
+  stage: test
+  tags:
+    - build-amd64
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH && $CI_PIPELINE_SOURCE == "push" || $CI_PIPELINE_SOURCE == "merge_request_event"'
+  script:
+    - cd extension
+    - npm ci --legacy-peer-deps
+    - npm run test:unit -- --ci --reporters=default --reporters=jest-junit
+  variables:
+    JEST_JUNIT_OUTPUT_NAME: junit.xml
+  artifacts:
+    when: always
+    reports:
+      junit: extension/junit.xml
+
 test:
+  needs:
+    - unit-test
   image: dockware/dev:$PLATFORM_BRANCH
   stage: test
   tags:
@@ -59,9 +79,9 @@ test:
       fi
     - mkdir -p $PWA_DIR
     - cd $PWA_DIR
-    - nvm install 12.22.10 --default
-    - npm set unsafe-perm true --silent
-    - npm install --silent -g @shopgate/platform-sdk
+    - nvm install 24 && nvm use 24
+    - npm config set legacy-peer-deps true
+    - npm install -g --silent @shopgate/platform-sdk@2.0.0
     - sgconnect login --username "${SG_USER}" --password "${SG_PASS}"
     - sgconnect init --appId "${APP_ID}" --force
     - cd ${PWA_DIR}/extensions
