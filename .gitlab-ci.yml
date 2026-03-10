@@ -88,8 +88,8 @@ test:
     - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/apite/shopgate/connect-engage/shopware6/ext-shopware6-cart.git
     - mkdir -p ${PWA_DIR}/extensions/$CI_PROJECT_NAME
     - cp -r $CI_PROJECT_DIR/* ${PWA_DIR}/extensions/$CI_PROJECT_NAME
-    - npm run init --silent --prefix ${PWA_DIR}/extensions/ext-shopware6-cart/extension
-    - npm run init --silent --prefix ${PWA_DIR}/extensions/$CI_PROJECT_NAME/extension
+    - npm run init --prefix ${PWA_DIR}/extensions/ext-shopware6-cart/extension
+    - npm run init --prefix ${PWA_DIR}/extensions/$CI_PROJECT_NAME/extension
     - sgconnect extension attach ext-shopware6-cart $CI_PROJECT_NAME
     - touch $CI_PROJECT_DIR/backend_output.log
     - sgconnect backend start >> $CI_PROJECT_DIR/backend_output.log 2>&1 &
