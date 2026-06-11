@@ -1,6 +1,6 @@
 'use strict'
 
-const { contextManager: { saveContextToken } } = require('@apite/shopware6-utility')
+const { contextManager: { saveContextToken } } = require('@shopgate/shopware6-utility')
 
 /**
  * @param {ApiteSW6Utility.PipelineContext} context

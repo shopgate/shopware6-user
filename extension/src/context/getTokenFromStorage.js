@@ -1,6 +1,6 @@
 'use strict'
 
-const { contextManager: { getContextToken: getTokenFromStorage } } = require('@apite/shopware6-utility')
+const { contextManager: { getContextToken: getTokenFromStorage } } = require('@shopgate/shopware6-utility')
 
 /**
  * @param {ApiteSW6Utility.PipelineContext} context

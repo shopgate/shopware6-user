@@ -1,5 +1,5 @@
 {
-  "name": "@apite/shopware6-user",
+  "name": "@shopgate/shopware6-user",
   "description": "Shopware 6 user extension frontend",
   "scripts": {
     "init": "npm i && cd ../extension && npm i && cd ..",

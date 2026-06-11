@@ -3,7 +3,7 @@
 const {
   configManager: { getEndpoint },
   connectApiManager: { getLoginUrl }
-} = require('@apite/shopware6-utility')
+} = require('@shopgate/shopware6-utility')
 const path = require('path')
 const { getRegistrationPath } = require('../services/configManager')
 

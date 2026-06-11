@@ -1,6 +1,6 @@
 {
-  "version": "2.0.1",
-  "id": "@apite/shopware6-user",
+  "version": "3.0.0",
+  "id": "@shopgate/shopware6-user",
   "trusted": true,
   "configuration": {
     "endpoint": {

@@ -23,7 +23,7 @@ const baseInput = {
   parameters: { login: 'user@test.com', password: 'secret' }
 }
 
-jest.mock('@apite/shopware6-utility', () => ({
+jest.mock('@shopgate/shopware6-utility', () => ({
   apiManager: {
     login: jest.fn(),
     getSessionContext: jest.fn()
@@ -54,7 +54,7 @@ describe('login step', () => {
   let utility
 
   beforeEach(() => {
-    utility = require('@apite/shopware6-utility')
+    utility = require('@shopgate/shopware6-utility')
     utility.clientManger.createApiConfig.mockResolvedValue({
       defaults: { headers: {} }
     })

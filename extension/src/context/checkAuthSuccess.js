@@ -3,7 +3,7 @@
 const {
   contextManager: { removeContextToken },
   errorList: { UnknownError }
-} = require('@apite/shopware6-utility')
+} = require('@shopgate/shopware6-utility')
 const { decorateMessage } = require('../services/logDecorator')
 
 /**

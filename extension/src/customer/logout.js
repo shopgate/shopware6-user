@@ -3,7 +3,7 @@
 const {
   apiManager: { logout },
   clientManger: { createApiConfig }
-} = require('@apite/shopware6-utility')
+} = require('@shopgate/shopware6-utility')
 const { decorateError } = require('../services/logDecorator')
 
 /**

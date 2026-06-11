@@ -1,4 +1,4 @@
-## Shopgate Connect Shopware 6 User Extension by Apite
+## Shopgate Connect Shopware 6 User Extension by Apite, Managed By Shopgate
 
 ### Development
 
@@ -15,8 +15,8 @@ If you need to add to the Utility extension, you will need to download it separa
 
 ```shell
 cd ..
-git clone git@gitlab.com:apite/shopgate/connect-engage/shopware6-utility.git
-cd ext-shopware6-user/extension
+git clone git@github.com:shopgate/shopware6-utility.git
+cd shopware6-user/extension
 npm run utility:develop
 ```
 
@@ -27,7 +27,7 @@ You can set up the ENV variables when running `sgconnect` or use a local `.env` 
 ##### For inline, the command will look like this:
 
 ```shell
-SW_ENDPOINT=http://localhost SW_ACCESS_KEY=SWSCMMJTYLVIT1LBMJQWDLNSRG node $(which sgconnect) backend start
+SW_ENDPOINT=http://localhost SW_ACCESS_KEY=SWSCMMJTYL... node $(which sgconnect) backend start
 ```
 
 ##### As an `.env` file.
@@ -36,8 +36,8 @@ In `[root]/extension` create an `.env` file with content like this:
 
 ```dotenv
 SW_ENDPOINT: "http://localhost"
-SW_ACCESS_KEY: "SWSCMMJTYLVIT1LBMJQWDLNSRG"
-SW_LANG_ID: "2fbb5fe2e29a4d70aa5854ce7ce3e20b"
+SW_ACCESS_KEY: "SWSCMMJTYL..."
+SW_LANG_ID: "2fbb5fe2e2..."
 ```
 
 Run:

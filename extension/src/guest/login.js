@@ -6,7 +6,7 @@ const {
   contextManager: { getContextToken },
   errorManager: { throwOnApiError, throwOnMessage },
   errorList: { InvalidCredentialsError }
-} = require('@apite/shopware6-utility')
+} = require('@shopgate/shopware6-utility')
 const { decorateMessage, obfuscateString } = require('../services/logDecorator')
 
 /**
