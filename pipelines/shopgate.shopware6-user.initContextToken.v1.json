@@ -1,14 +1,14 @@
 {
   "version": "1",
   "pipeline": {
-    "id": "apite.user.initContextToken.v1",
+    "id": "shopgate.shopware6-user.initContextToken.v1",
     "public": true,
     "input": [],
     "output": [],
     "steps": [
       {
-        "id": "@apite/shopware6-user",
-        "path": "@apite/shopware6-user/src/context/getTokenFromStorage.js",
+        "id": "@shopgate/shopware6-user",
+        "path": "@shopgate/shopware6-user/src/context/getTokenFromStorage.js",
         "type": "extension",
         "input": [],
         "output": [
@@ -18,7 +18,7 @@
       {
         "type": "pipeline",
         "trusted": true,
-        "id": "apite.user.setContextToken.v1",
+        "id": "shopgate.shopware6-user.setContextToken.v1",
         "input": [
           {"key": "contextToken", "id": "105"}
         ],

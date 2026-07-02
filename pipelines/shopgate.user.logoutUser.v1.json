@@ -10,8 +10,8 @@
     "steps": [
       {
         "type": "extension",
-        "id": "@apite/shopware6-user",
-        "path": "@apite/shopware6-user/src/customer/logout.js",
+        "id": "@shopgate/shopware6-user",
+        "path": "@shopgate/shopware6-user/src/customer/logout.js",
         "input": [],
         "output": []
       },
@@ -25,7 +25,7 @@
       {
         "type": "pipeline",
         "trusted": true,
-        "id": "apite.user.getOrCreateCartToken.v1",
+        "id": "shopgate.shopware6-user.getOrCreateCartToken.v1",
         "input": [],
         "output": []
       }

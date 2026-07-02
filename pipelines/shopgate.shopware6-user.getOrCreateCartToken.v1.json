@@ -1,7 +1,7 @@
 {
   "version": "1",
   "pipeline": {
-    "id": "apite.user.getOrCreateCartToken.v1",
+    "id": "shopgate.shopware6-user.getOrCreateCartToken.v1",
     "public": true,
     "input": [],
     "output": [
@@ -11,7 +11,7 @@
       {
         "type": "pipeline",
         "trusted": false,
-        "id": "apite.cart.getContextToken.v1",
+        "id": "shopgate.shopware6-cart.getContextToken.v1",
         "input": [],
         "output": [
           {"key": "contextToken", "id": "105", "optional": true}
@@ -30,7 +30,7 @@
         "then": {
           "type": "pipeline",
           "trusted": false,
-          "id": "apite.cart.newCart.v1",
+          "id": "shopgate.shopware6-cart.newCart.v1",
           "input": [],
           "output": [
             {"key": "contextToken", "id": "105"}
@@ -40,7 +40,7 @@
       {
         "type": "pipeline",
         "trusted": true,
-        "id": "apite.user.setContextToken.v1",
+        "id": "shopgate.shopware6-user.setContextToken.v1",
         "input": [
           {"key": "contextToken", "id": "105"}
         ],

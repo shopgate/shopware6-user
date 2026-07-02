@@ -13,7 +13,7 @@
       {
         "type": "pipeline",
         "trusted": true,
-        "id": "apite.user.getOrCreateCartToken.v1",
+        "id": "shopgate.shopware6-user.getOrCreateCartToken.v1",
         "input": [],
         "output": [
           {"key": "contextToken", "id": "105"}
@@ -21,8 +21,8 @@
       },
       {
         "type": "extension",
-        "id": "@apite/shopware6-user",
-        "path": "@apite/shopware6-user/src/guest/getLoginToken.js",
+        "id": "@shopgate/shopware6-user",
+        "path": "@shopgate/shopware6-user/src/guest/getLoginToken.js",
         "input": [
           {"key": "contextToken", "id": "105"}
         ],
@@ -33,8 +33,8 @@
       },
       {
         "type": "extension",
-        "id": "@apite/shopware6-user",
-        "path": "@apite/shopware6-user/src/guest/getRegistrationUrl.js",
+        "id": "@shopgate/shopware6-user",
+        "path": "@shopgate/shopware6-user/src/guest/getRegistrationUrl.js",
         "input": [
           {"key": "token", "id": "1010"},
           {"key": "expiration", "id": "1020"}
