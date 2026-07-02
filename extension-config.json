@@ -1,5 +1,5 @@
 {
-  "version": "3.0.0",
+  "version": "3.0.1-beta.1",
   "id": "@shopgate/shopware6-user",
   "trusted": true,
   "configuration": {
