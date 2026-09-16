@@ -23,8 +23,5 @@
     "react": "~16.12.0",
     "react-redux": "^5.1.2",
     "redux": "^4.0.1"
-  },
-  "peerDependencies": {
-    "@shopgate/pwa-common": "6.x"
   }
 }
