@@ -28,7 +28,6 @@ extensions. Marked `"trusted": true`. Licensed Apache-2.0.
 - Node: no `.nvmrc`/`engines` in `extension/` or `frontend/`; CI uses Node 24. `tests/package.json` declares `node <= 10.0.0`, which CI ignores.
 - Unit tests: Jest 30 (`extension/`). API tests: Postman via Newman (`tests/`).
 - Lint: ESLint `standard` in `extension/`, `@shopgate/eslint-config` (ESLint 5) in `frontend/`. No Prettier, no `.editorconfig`.
-- Tooling: `sgconnect` CLI (`@shopgate/platform-sdk`, pinned 2.0.0 in CI). CI: GitLab (`.gitlab-ci.yml`).
 
 ## Common Commands
 
@@ -83,7 +82,6 @@ Do not copy Knowledge Base content into this file. Keep AGENTS.md focused on thi
 
 ## Deployment / CI Notes
 
-- `.gitlab-ci.yml`, stages `upload`, `test`, `deploy`. No GitHub workflows.
 - `unit-test` (Node 24 alpine) and `test` run on default-branch pushes and merge requests. `test` spins up `dockware/dev:6.6.8.2`, installs the Shopware plugin via composer, installs `@shopgate/platform-sdk@2.0.0`, clones and attaches `ext-shopware6-cart`, starts the backend and runs `npm run postman-ci`.
 - Release is tag-driven: `register package` tars the repo into the GitLab generic package registry; `publish to shopgate` then runs `sgconnect extension upload temp --force`. There is no `npm publish`.
 - Version source of truth is `extension-config.json` `version`. `extension/package.json` and `frontend/package.json` have no version field. Release commits are titled with the version (e.g. `v4.0.0-beta.1`) and tagged the same.
@@ -99,7 +97,6 @@ Do not copy Knowledge Base content into this file. Keep AGENTS.md focused on thi
 - `CHANGELOG.md` top entry is `4.0.0 - unreleased` while `extension-config.json` is `4.0.0-beta.1`; there is no 3.1.1 entry although tag `v3.1.1` exists.
 - `extension/package-lock.json` still records the old package name `@apite/shopware6-user`.
 - `customer/getUser.js` formats the birthday month with `date.getMonth()` without `+1` (zero-based). Do not "fix" silently; confirm intent first.
-- `.gitlab-ci.yml` hard-codes a Shopware access key and language id for the CI shop.
 
 ## Editing Guidelines for AI Agents
 
