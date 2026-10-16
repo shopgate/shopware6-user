@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres
 to [Semantic Versioning](http://semver.org/).
 
+## 4.0.0 - unreleased
+- pushes customer context information to `@shopgate/catalog-shopware6`
+- requires `@shopgate/catalog-shopware6` v1.3.0 or higher
+
 ## 3.1.0
 - align pipeline names & references
 - requires `@shopgate/shopware6-cart` v3.1.0 or higher
