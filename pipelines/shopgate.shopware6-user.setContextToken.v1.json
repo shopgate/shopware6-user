@@ -24,6 +24,14 @@
           {"key": "contextToken", "id": "1000"}
         ],
         "output": []
+      },
+      {
+        "type": "pipeline",
+        "id": "shopgate.catalog-shopware6.setContextToken.v1",
+        "input": [
+          {"key": "contextToken", "id": "1000"}
+        ],
+        "output": []
       }
     ]
   }
