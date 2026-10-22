@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres
 to [Semantic Versioning](http://semver.org/).
 
-## 4.0.0 - unreleased
+## 4.0.0 - 2026-10-22
 - pushes customer context information to `@shopgate/catalog-shopware6`
 - requires `@shopgate/catalog-shopware6` v1.3.0 or higher
 
